@@ -41,7 +41,7 @@ const LoginModal = (props) => {
       navigate("/JaneHopkinsDoctor");
     } else if (props.name === "Bavaria") {
       event.preventDefault();
-      navigate("/Patients_Bavaria");
+      navigate("/BavariaHome");
     }
   };
 
