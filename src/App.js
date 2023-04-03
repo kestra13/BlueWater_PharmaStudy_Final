@@ -18,6 +18,7 @@ import View_Study from './pages/View_Study_Bavaria';
 import Shipment_Page from './pages/Shipment_Page_Bavaria';
 import BavariaHome from "./pages/BavariaHome";
 
+
 function App() {
   return (
     <div>
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route path="/JaneHopkinsDoctor" element={<JaneHopkinsDoctor />} />
+          
           <Route path="/BavariaHome" element={<BavariaHome />} />
           <Route path="/Patients_Bavaria" element={<Patients_Bavaria />} />
           <Route path="/View_Study" element={<View_Study />} />

@@ -5,10 +5,12 @@ import { Button } from "@mui/material";
 import Patients_Bavaria from "./Patients_Bavaria";
 import View_Study from "./View_Study_Bavaria";
 import Shipment_Page from "./Shipment_Page_Bavaria";
+import TopBanner from "../components/TopBanner";
 
 const BavariaHome = () => {
   return (
     <div>
+      <TopBanner/>
     <nav>
         <Button
           component={Link}
