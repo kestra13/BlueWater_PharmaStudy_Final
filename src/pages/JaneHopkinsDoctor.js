@@ -47,8 +47,10 @@ const JaneHopkinsDoctor = () => {
     <Navbar onLogout={handleLogout} />
     <Stack direction="row">
       <SideBanner />
+      <Box>
       <Typography >Add Patient</Typography>
       <AddPatient onAddPatient={handleAddPatient} />
+      </Box>
     </Stack>
     <h1>Patient List</h1>
     <Button>View Patients</Button>

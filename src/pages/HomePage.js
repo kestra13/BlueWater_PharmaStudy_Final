@@ -12,30 +12,14 @@ import FDAIcon from "../assets/fda-logo.jpeg";
 import JHIcon from "../assets/JaneHopkins.jpg";
 import BavariaIcon from "../assets/Bavaria.jpg";
 import { Route, Switch } from 'react-router-dom';
+import TopBanner from '../components/TopBanner';
 
 const HomePage = () => {
  
 
   return (
     <div style={{ height: "100vh" }} className="App">
-    <AppBar position="static">
-      <Toolbar variant="dense">
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        ></IconButton>
-        <Typography variant="h2" color="inherit" component="div">
-          PharmaStudy
-        </Typography>
-        {/* <div style={{ position: "relative", top: "120px", right: "350px" }}>
-          <Button variant="contained" onClick={() => addPatient()}>
-            Add Patient
-          </Button>
-        </div> */}
-      </Toolbar>
-    </AppBar>
+      <TopBanner/>
         <Typography
           sx = {{
             pt: 10
@@ -60,3 +44,23 @@ const HomePage = () => {
 }
 
 export default HomePage;
+
+/*<AppBar position="static">
+<Toolbar variant="dense">
+<IconButton
+  edge="start"
+  color="inherit"
+  aria-label="menu"
+  sx={{ mr: 2 }}
+></IconButton>
+<Typography variant="h2" color="inherit" component="div">
+  PharmaStudy
+</Typography>
+    {/* <div style={{ position: "relative", top: "120px", right: "350px" }}>
+  <Button variant="contained" onClick={() => addPatient()}>
+    Add Patient
+  </Button>
+</div> **}
+</Toolbar>
+</AppBar>
+*/
