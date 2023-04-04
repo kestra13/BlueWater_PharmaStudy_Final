@@ -20,8 +20,18 @@ import BavariaHome from "./pages/BavariaHome";
 
 
 function App() {
+
+ 
+
+
   return (
     <div>
+       <h1>Patient List</h1>
+      <ul>
+        {patients.map(patient => (
+          <li key={patient.id}>{patient.name}</li> 
+        ))}
+      </ul>
       <ApolloProvider client={client}>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
