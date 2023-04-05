@@ -10,6 +10,7 @@ import PatientDisplay from "../components/PatientDisplay";
 import { ApolloProvider } from "@apollo/client";
 import client from "../components/apolloClient";
 import { useNavigate } from "react-router-dom";
+import PatientPopout from "../components/PatientPopout";
 
 
 const JaneHopkinsDoctor = () => {
@@ -17,9 +18,21 @@ const JaneHopkinsDoctor = () => {
 
     console.log("Entities in App:", entities);
     console.log("Patient entity:", entities.patient);
-  
+
+    const [selectedPatient, setSelectedPatient] = useState(null);
+    const [isPopoutOpen, setIsPopoutOpen] = useState(false);
   
     const [patients, setPatients] = useState([]);
+
+    const handlePatientClick = (patient) => {
+      setSelectedPatient(patient);
+      setIsPopoutOpen(true);
+    };
+
+    const handlePopoutClose = () => {
+      setIsPopoutOpen(false);
+      setSelectedPatient(null);
+    };
 
     useEffect(() => {
       const fetchPatients = async () => {
@@ -57,10 +70,12 @@ const JaneHopkinsDoctor = () => {
     </Stack>
     <h1>Patient List</h1>
     <Button>View Patients</Button>
-    <PatientTable patients={patients} />
-    
-    
-    
+    <PatientTable patients={patients} onPatientClick={handlePatientClick} />
+      <PatientPopout
+        isOpen={isPopoutOpen}
+        handleClose={handlePopoutClose}
+        patient={selectedPatient}
+      />
   </div>
   )
 }

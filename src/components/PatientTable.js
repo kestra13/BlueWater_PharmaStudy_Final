@@ -1,7 +1,8 @@
 import React from "react";
 import "./PatientTable.css";
+import { Button } from "@mui/material";
 
-const PatientTable = ({ patients }) => {
+const PatientTable = ({ patients, onPatientClick }) => {
   if (!Array.isArray(patients)) {
     return <div>No patient data available.</div>;
   }
@@ -18,7 +19,11 @@ const PatientTable = ({ patients }) => {
       <tbody>
         {patients.map((patient) => (
           <tr key={patient.id}>
-            <td>{patient.name}</td>
+            <td>
+              <Button onClick={() => onPatientClick(patient)}>
+                {patient.name}
+              </Button>
+            </td>
             <td>{patient.dob}</td>
             <td>{patient.insuranceNumber}</td>
           </tr>
