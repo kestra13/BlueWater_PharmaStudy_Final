@@ -18,17 +18,22 @@ const JaneHopkinsDoctor = () => {
     console.log("Entities in App:", entities);
     console.log("Patient entity:", entities.patient);
   
-    const addPatient = async (patientData) => {
-      const { name, dob, insuranceNumber } = patientData;
-      const addPatientResponse = await entities.patient.add({
-        name: name,
-        dob: dob,
-        insuranceNumber: insuranceNumber,
-      });
-      console.log(addPatientResponse);
-    };
   
     const [patients, setPatients] = useState([]);
+
+    useEffect(() => {
+      const fetchPatients = async () => {
+        try {
+          const response = await entities.patient.list();
+          console.log("Response:", response);
+          setPatients(response.items);
+        } catch (error) {
+          console.error("Error fetching patients:", error);
+        }
+      };
+  
+      fetchPatients();
+    }, [entities]);
   
    
   const navigate = useNavigate();
@@ -36,9 +41,7 @@ const JaneHopkinsDoctor = () => {
   const handleLogout = () => {
     navigate("/");
   }
-    const handleAddPatient = async (patientData) => {
-      await addPatient(patientData);
-    };
+   
 
   return (
     <div>
@@ -48,8 +51,8 @@ const JaneHopkinsDoctor = () => {
     <Stack direction="row">
       <SideBanner />
       <Box>
-      <Typography >Add Patient</Typography>
-      <AddPatient onAddPatient={handleAddPatient} />
+     
+     
       </Box>
     </Stack>
     <h1>Patient List</h1>
