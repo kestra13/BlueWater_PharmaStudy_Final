@@ -58,9 +58,9 @@ const JaneHopkinsDoctor = () => {
     <h1>Patient List</h1>
     <Button>View Patients</Button>
     <PatientTable patients={patients} />
-    <ApolloProvider client = {client}>
-    <PatientDisplay />
-    </ApolloProvider>
+    
+    
+    
   </div>
   )
 }
