@@ -23,8 +23,7 @@ const JaneHopkinsDoctor = () => {
 
   const [loading, setLoading] = useState(true);
 
-  console.log("Entities in App:", entities);
-  console.log("Patient entity:", entities.patient);
+
 
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [isPopoutOpen, setIsPopoutOpen] = useState(false);
@@ -45,7 +44,7 @@ const JaneHopkinsDoctor = () => {
     const fetchPatients = async () => {
       try {
         const response = await entities.patient.list();
-        console.log("Response:", response);
+        //console.log("Response:", response);
         setPatients(response.items);
         setLoading(false);
       } catch (error) {

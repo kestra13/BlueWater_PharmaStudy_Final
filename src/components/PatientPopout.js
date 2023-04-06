@@ -3,6 +3,8 @@ import { Modal, Box, Typography, Grid, Paper, TextField, Button, List, ListItem 
 
 const PatientPopout = ({ isOpen, handleClose, patient }) => {
 
+  console.log("PatientPopout: " + patient)
+
   if (!patient)
   {
     return null
@@ -75,10 +77,13 @@ const PatientPopout = ({ isOpen, handleClose, patient }) => {
           </Paper>
         </Grid>
 
+        
 
       </Grid>
     </Box>
   </Modal>
+
+ 
   );
 };
 
