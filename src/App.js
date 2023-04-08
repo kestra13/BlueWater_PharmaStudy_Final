@@ -20,10 +20,6 @@ import BavariaHome from "./pages/BavariaHome";
 
 
 function App() {
-
- 
-
-
   return (
     <div>
        
