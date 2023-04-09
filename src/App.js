@@ -36,7 +36,9 @@ function App() {
           <Route path="/Patients_Bavaria" element={<Patients_Bavaria />} />
           <Route path="/View_Study" element={<View_Study />} />
           <Route path="/Shipment_Page" element={<Shipment_Page />} />
-          <Route path="/FDAHome" element={<FDAHome />} />
+		  <Route path="/FDA/*" element={<FDAHome />} />
+	
+	  		
 
         </Routes>
      

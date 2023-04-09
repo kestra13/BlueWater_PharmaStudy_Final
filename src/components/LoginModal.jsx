@@ -44,7 +44,7 @@ const LoginModal = (props) => {
       navigate("/BavariaHome");
     } else if (props.name === "FDA") {
       event.preventDefault();
-      navigate("/FDAHome");
+		navigate("/FDA/Patients");
     }
   };
 
