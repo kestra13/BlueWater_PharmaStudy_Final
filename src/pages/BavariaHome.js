@@ -39,6 +39,7 @@ const BavariaHome = () => {
           Shipment Page
         </Button>
       </nav>
+      
     <Routes>
       <Route path="/Patients_Bavaria" element={<Patients_Bavaria />} />
       <Route path="/View_Study" element={<View_Study />} />

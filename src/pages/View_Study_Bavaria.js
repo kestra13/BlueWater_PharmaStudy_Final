@@ -1,14 +1,28 @@
 import React from 'react';
 import Patients_Display from '../components/Patients_Display_Bavaria';
+import Navbar_Bavaria from "../components/Navbar_Bavaria";
+import TopBanner from "../components/TopBanner";
+import { useNavigate } from "react-router-dom";
 
-const View_Study = () => {
+
+  const View_Study = () => {
+    const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/");
+  };
+
   return (
 
     <div>
-      
-      <div>URL: http://localhost:3000/View_Study</div>
+      <TopBanner/>
 
-      <div style={{textAlign: "left", fontSize: "12px"}}>
+      <Navbar_Bavaria onLogout={handleLogout} />
+
+
+
+      
+        <div style={{textAlign: "left", fontSize: "12px"}}>
           <h1>Ongoing Study: Study_name</h1>
           <h1>Shipment History: [50] drug_name vs [50] Placebo Shipment Date</h1>
         </div>
@@ -22,4 +36,4 @@ const View_Study = () => {
   )
 }
 
-export default View_Study
+export default View_Study;
