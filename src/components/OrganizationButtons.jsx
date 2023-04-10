@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { Box, Typography, Button, Modal } from "@mui/material";
 import LoginModal from "./LoginModal";
 import { useNavigate } from "react-router-dom";
-import FDAIcon from "../assets/fda-logo.jpeg";
-import JHIcon from "../assets/JaneHopkins.jpg";
-import BavariaIcon from "../assets/Bavaria.jpg";
 
 const OrganizationButtons = (props) => {
   const [open, setOpen] = useState(false);
