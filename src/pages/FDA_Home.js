@@ -3,7 +3,11 @@ import TopBanner from '../components/TopBanner'
 
 const FDA_Home = () => {
   return (
-   <TopBanner/>
+    <div>
+      <TopBanner/>
+   
+      <h1> Work In Progress </h1>
+   </div>
   )
 }
 

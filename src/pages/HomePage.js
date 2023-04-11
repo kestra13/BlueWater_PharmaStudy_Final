@@ -22,7 +22,8 @@ const HomePage = () => {
       <TopBanner/>
         <Typography
           sx = {{
-            pt: 10
+            pt: 10,
+            fontFamily: "Raleway"
           }}
           align = "center"
           variant = "h4"

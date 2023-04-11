@@ -1,39 +1,85 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  Button,
   Stack,
-  TextField,
   Typography,
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
-
-// const data = [
-//   { id: 1, name: 'FDA' },
-//   { id: 2, name: 'Jane Hopkins' },
-//   { id: 3, name: 'Bavaria' },
-// ];
+import { 
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from 'firebase/auth';
+import { auth } from "../firebase-config";
+import "../App.css";
 
 const LoginModal = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (props.name === "Jane Hopkins") {
-      navigate("/JaneHopkinsDoctor");
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+    });
+
+  }, []);
+
+  const register = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      );
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+
+    if (user && props.name == "FDA") {
+      navigate("/FDAHome");
+    }
+
+    if (user && props.name === "Jane Hopkins") {
+      navigate("/JaneHopkinsDoctor");
+    }
+
+    if (user && props.name === "Bavaria") {
+      navigate("/BavariaHome");
+    }
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  const logout = async () => {
+    await signOut(auth);
   };
+
+  // const handleLogin = () => {
+  //   if (user && props.name === "Jane Hopkins") {
+  //     navigate("/JaneHopkinsDoctor");
+  //   }
+  // };
 
   const handleSubmit = (event) => {
     if (props.name === "Jane Hopkins") {
@@ -58,66 +104,56 @@ const LoginModal = (props) => {
       >
         <CloseIcon />
       </IconButton>
-      <Typography align="center" sx={{ color: "#fff" }} variant="h1">
+      <Typography align="center" variant="h3" fontFamily={"Raleway"}>
         {props.name}
       </Typography>
-      <Typography align="center" sx={{ color: "#fff" }} variant="h2">
+      {/* <Typography align="center" sx={{ color: "#fff" }} variant="h2">
         Login
-      </Typography>
-      <Stack spacing={4}>
-        <TextField
-          sx={{
-            input: {
-              fontWeight: "500",
-              border: "none",
-              borderRadius: "4px",
-            },
-            width: "400px",
-            backgroundColor: "#fff",
-            borderRadius: "40px",
+      </Typography> */}
+      <Stack spacing={2}>
+
+      <div>
+        <h3> Register User </h3>
+        <input
+          placeholder="Email..."
+          onChange={(event) => {
+            setRegisterEmail(event.target.value);
           }}
-          height="76px"
-          //value={search}
-          //onChange={(e) => setSearch(e.target.value.toLowerCase())}
-          placeholder="E-mail Address"
-          type="text"
         />
-        <TextField
-          sx={{
-            input: {
-              fontWeight: "500",
-              border: "none",
-              borderRadius: "4px",
-            },
-            width: "400px",
-            backgroundColor: "#fff",
-            borderRadius: "40px",
+        <input
+          placeholder="Password..."
+          onChange={(event) => {
+            setRegisterPassword(event.target.value);
           }}
-          height="76px"
-          //value={search}
-          //onChange={(e) => setSearch(e.target.value.toLowerCase())}
-          placeholder="Password"
-          type="text"
         />
-        <Button
-          sx={{
-            bgcolor: "#004000",
-            width: "100px",
+
+        <button onClick={register}> Create User</button>
+      </div>
+
+      <div>
+        <h3> Login </h3>
+        <input
+          placeholder="Email..."
+          onChange={(event) => {
+            setLoginEmail(event.target.value);
           }}
-          variant="contained"
-          onClick={handleSubmit}
-        >
-          Submit
-        </Button>
-        <Button
-          sx={{
-            bgcolor: "#004000",
-            width: "100px",
+        />
+        <input
+          placeholder="Password..."
+          type="password"
+          onChange={(event) => {
+            setLoginPassword(event.target.value);
           }}
-          variant="contained"
-        >
-          Register
-        </Button>
+        />
+
+        <button onClick={login}> Login</button>
+      </div>
+
+      <h4> User Logged In: </h4>
+      {user ? user.email : "Not Logged In"}
+
+      <button onClick={logout}> Sign Out </button>
+
       </Stack>
     </div>
   );
