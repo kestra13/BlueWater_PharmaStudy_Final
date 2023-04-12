@@ -17,7 +17,7 @@ import Patients_Bavaria from './pages/Patients_Bavaria';
 import View_Study from './pages/View_Study_Bavaria';
 import Shipment_Page from './pages/Shipment_Page_Bavaria';
 import BavariaHome from "./pages/BavariaHome";
-import FDA_Home from "./pages/FDA_Home";
+import FDAHome from "./pages/FDAHome";
 
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
     <div>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
-          <Route path="/FDAHome" element={<FDA_Home />} />
+          <Route path="/FDAHome" element={<FDAHome />} />
           <Route path="/JaneHopkinsDoctor" element={<JaneHopkinsDoctor />} />
           
           <Route path="/BavariaHome" element={<BavariaHome />} />

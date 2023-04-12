@@ -4,6 +4,7 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
+import "./LoginModal.css"
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -13,7 +14,6 @@ import {
   signOut,
 } from 'firebase/auth';
 import { auth } from "../firebase-config";
-import "../App.css";
 
 const LoginModal = (props) => {
 
@@ -68,10 +68,12 @@ const LoginModal = (props) => {
 
     if (user && props.name === "Bavaria") {
       navigate("/BavariaHome");
-    } else if (props.name === "FDA") {
-      event.preventDefault();
-		navigate("/FDA/Patients");
     }
+    
+    // else if (props.name === "FDA") {
+    //   event.preventDefault();
+		// navigate("/FDA/Patients");
+    // }
   };
 
   const logout = async () => {
