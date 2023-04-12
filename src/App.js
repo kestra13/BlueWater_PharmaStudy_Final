@@ -22,13 +22,8 @@ import FDA_Home from "./pages/FDA_Home";
 
 function App() {
 
- 
-
-
   return (
     <div>
-       
-      
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route path="/FDAHome" element={<FDA_Home />} />
@@ -39,7 +34,6 @@ function App() {
           <Route path="/View_Study" element={<View_Study />} />
           <Route path="/Shipment_Page" element={<Shipment_Page />} />
         </Routes>
-     
     </div>
   );
 }

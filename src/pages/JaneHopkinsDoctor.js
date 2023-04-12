@@ -17,6 +17,8 @@ import { ApolloProvider } from "@apollo/client";
 import client from "../components/apolloClient";
 import { useNavigate } from "react-router-dom";
 import PatientPopout from "../components/PatientPopout";
+import { signOut } from 'firebase/auth';
+import { auth } from "../firebase-config";
 
 const JaneHopkinsDoctor = () => {
   const { entities } = useJaneHopkins();
@@ -57,7 +59,8 @@ const JaneHopkinsDoctor = () => {
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await signOut(auth);
     navigate("/");
   };
 

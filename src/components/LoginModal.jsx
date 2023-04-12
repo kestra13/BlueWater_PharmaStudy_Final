@@ -58,7 +58,7 @@ const LoginModal = (props) => {
       console.log(error.message);
     }
 
-    if (user && props.name == "FDA") {
+    if (user && props.name === "FDA") {
       navigate("/FDAHome");
     }
 
@@ -75,21 +75,15 @@ const LoginModal = (props) => {
     await signOut(auth);
   };
 
-  // const handleLogin = () => {
-  //   if (user && props.name === "Jane Hopkins") {
+  // const handleSubmit = (event) => {
+  //   if (props.name === "Jane Hopkins") {
+  //     event.preventDefault();
   //     navigate("/JaneHopkinsDoctor");
+  //   } else if (props.name === "Bavaria") {
+  //     event.preventDefault();
+  //     navigate("/BavariaHome");
   //   }
   // };
-
-  const handleSubmit = (event) => {
-    if (props.name === "Jane Hopkins") {
-      event.preventDefault();
-      navigate("/JaneHopkinsDoctor");
-    } else if (props.name === "Bavaria") {
-      event.preventDefault();
-      navigate("/BavariaHome");
-    }
-  };
 
   return (
     <div className="modal">
@@ -100,61 +94,67 @@ const LoginModal = (props) => {
         onClick={() => {
           props.onClose();
         }}
-        sx={{ position: "absolute", top: "10px", right: "10px", color: "#fff" }}
+        sx={{ position: "absolute",
+              top: "10px",
+              right: "10px",
+              color: "#fff"
+            }}
       >
         <CloseIcon />
       </IconButton>
-      <Typography align="center" variant="h3" fontFamily={"Raleway"}>
+      <Typography
+        align="center"
+        variant="h3"
+        fontFamily={"Raleway"}
+      >
         {props.name}
       </Typography>
-      {/* <Typography align="center" sx={{ color: "#fff" }} variant="h2">
-        Login
-      </Typography> */}
-      <Stack spacing={2}>
+      <Stack
+        spacing={2}
+      >
+        <div>
+          <h3> Register User </h3>
+          <input
+            placeholder="Email..."
+            onChange={(event) => {
+              setRegisterEmail(event.target.value);
+            }}
+          />
+          <input
+            placeholder="Password..."
+            onChange={(event) => {
+              setRegisterPassword(event.target.value);
+            }}
+          />
 
-      <div>
-        <h3> Register User </h3>
-        <input
-          placeholder="Email..."
-          onChange={(event) => {
-            setRegisterEmail(event.target.value);
-          }}
-        />
-        <input
-          placeholder="Password..."
-          onChange={(event) => {
-            setRegisterPassword(event.target.value);
-          }}
-        />
+          <button onClick={register}> Create User</button>
+        </div>
 
-        <button onClick={register}> Create User</button>
-      </div>
+        <div>
+          <h3> Login </h3>
+          <input
+            placeholder="Email..."
+            onChange={(event) => {
+              setLoginEmail(event.target.value);
+            }}
+          />
+          <input
+            placeholder="Password..."
+            type="password"
+            onChange={(event) => {
+              setLoginPassword(event.target.value);
+            }}
+          />
 
-      <div>
-        <h3> Login </h3>
-        <input
-          placeholder="Email..."
-          onChange={(event) => {
-            setLoginEmail(event.target.value);
-          }}
-        />
-        <input
-          placeholder="Password..."
-          type="password"
-          onChange={(event) => {
-            setLoginPassword(event.target.value);
-          }}
-        />
+          <button onClick={login}> Login</button>
+        </div>
 
-        <button onClick={login}> Login</button>
-      </div>
+        <h4> User Logged In: </h4>
+        {user ? user.email : "Not Logged In"}
 
-      <h4> User Logged In: </h4>
-      {user ? user.email : "Not Logged In"}
-
-      <button onClick={logout}> Sign Out </button>
-
+        <button onClick={logout}> Sign Out </button>
       </Stack>
+      
     </div>
   );
 };
