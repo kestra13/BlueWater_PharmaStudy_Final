@@ -68,6 +68,9 @@ const LoginModal = (props) => {
 
     if (user && props.name === "Bavaria") {
       navigate("/BavariaHome");
+    } else if (props.name === "FDA") {
+      event.preventDefault();
+		navigate("/FDA/Patients");
     }
   };
 
