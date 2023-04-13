@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import FDAIcon from "../assets/fda-logo.jpeg";
 import JHIcon from "../assets/JaneHopkins.jpg";
-import BavariaIcon from "../assets/Bavaria.jpg";
+import BavariaIcon from "../assets/bavarialogo.jpeg";
 import { Route, Switch } from 'react-router-dom';
 import TopBanner from '../components/TopBanner';
 
@@ -22,7 +22,8 @@ const HomePage = () => {
       <TopBanner/>
         <Typography
           sx = {{
-            pt: 10
+            pt: 10,
+            fontFamily: "Raleway"
           }}
           align = "center"
           variant = "h4"

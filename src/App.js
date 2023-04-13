@@ -19,17 +19,14 @@ import Shipment_Page from './pages/Shipment_Page_Bavaria';
 import BavariaHome from "./pages/BavariaHome";
 import FDAHome from "./pages/FDAHome";
 
+
 function App() {
-
- 
-
 
   return (
     <div>
-       
-      
         <Routes>
           <Route exact path="/" element={<HomePage />} />
+          <Route path="/FDAHome" element={<FDAHome />} />
           <Route path="/JaneHopkinsDoctor" element={<JaneHopkinsDoctor />} />
           
           <Route path="/BavariaHome" element={<BavariaHome />} />
@@ -41,7 +38,6 @@ function App() {
 	  		
 
         </Routes>
-     
     </div>
   );
 }

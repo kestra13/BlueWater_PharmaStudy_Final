@@ -16,18 +16,18 @@ const OrganizationButtons = (props) => {
   return (
     <div>
       <Box>
-        <Typography sx={{ color: "#fff", bgcolor: "#1b76d2" }} variant="h4">
+        <Typography sx={{ fontFamily: "Raleway", textAlign: "center" }} variant="h4">
           {props.name}
         </Typography>
         <Button
           sx={{ bgcolor: "#003987" }}
-          variant="contained"
+          variant="text"
           onClick={handleOpen}
         >
           <Modal open={open} onClose={handleClose}>
             <Box
               position="absolute"
-              top="25%"
+              top="35%"
               left="36%"
               sx={{
                 backgroundColor: "#003987",
@@ -41,7 +41,7 @@ const OrganizationButtons = (props) => {
               />
             </Box>
           </Modal>
-          <img src={props.logo} style={{ width: "200px", height: "150px" }} />
+          <img src={props.logo} alt="Organization logo" style={{ width: "200px", height: "150px" }} />
         </Button>
       </Box>
     </div>
