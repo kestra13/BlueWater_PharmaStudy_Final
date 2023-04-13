@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   Box,
@@ -12,15 +12,64 @@ import {
   TableBody,
   TableRow,
   TableCell,
-
 } from "@mui/material";
 import { grey } from '@mui/material/colors';
+import useBavaria from "../hooks/useBavaria";
 
+export const PatientPopout_Bavaria = ({ isOpen, handleClose, patient }) => {
+  const { entities } = useBavaria();
 
-const PatientPopout = ({ isOpen, handleClose, patient }) => {
   const [viewMode, setViewMode] = useState("grid");
 
-  console.log("PatientPopout: " + patient);
+  console.log("PatientPopout: ", patient);
+
+  const sendThisToPreviousVisits = patient?.name;  
+  const [loading, setLoading] = useState(true);
+  const [tableRows, setTableRows] = useState([]);
+
+  const [patientName, setpatientName] = useState("David Upal"); // setPatientName when clicked on a name
+
+  useEffect(() => {
+    const fetchPatients = async () => {
+      try {
+        const response = await entities.listOfVisits.list();
+
+        const responseSize = response.items.length;
+
+        const rows = [];
+
+        for (let i = 0; i < responseSize; i++) {
+
+          if (response.items[i].patient === patientName) {
+            rows.push({
+              date: response.items[i].dateTime,
+              viralLoad: response.items[i].hivViralLoad,
+              notes: response.items[i].notes,
+            });
+
+          }
+
+          if (rows == null || !Array.isArray(rows)) {
+            rows.push({
+              date: "NA",
+              viralLoad: "NA",
+              notes: "NA",
+            })
+          }
+        }
+
+        setTableRows(rows);
+
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching patients:", error);
+      }
+    };
+
+    fetchPatients();
+  }, [entities, patientName]);
+
+
 
   if (!patient) {
     return null;
@@ -34,12 +83,8 @@ const PatientPopout = ({ isOpen, handleClose, patient }) => {
     setViewMode("list");
   };
 
-  const handleInputView = () => {
-    setViewMode("input")
-  };
-
-  const submitData = () => {
-
+  const handlePreviousVisitsView = () => {
+    setViewMode("previousvisits");
   };
 
   const renderPatientData = () => {
@@ -117,32 +162,30 @@ const PatientPopout = ({ isOpen, handleClose, patient }) => {
           </TableBody>
         </Table>
       );
-    }
-    else if (viewMode == "input"){
-      return(
-        <Box>
-        <TextField margin="normal" id="standard-basic" label="Viral Load" variant="standard" />
-        <TextField margin="normal" id="standard-notes" label="Notes" variant="standard" />
-        <Button
-            variant="contained"
-            color="primary"
-            onClick={submitData}
-            sx={{
-              mr: 1,
-              borderColor: viewMode === "input" ? "primary.main" : grey[500],
-              backgroundColor:
-                viewMode === "input" ? "primary.main" : "transparent",
-              color: viewMode === "input" ? "white" : "primary.main",
-            }}
-          >
-            Submit
-          </Button>
-        </Box>
-        
-        
+    } else if (viewMode === "previousvisits") {
+      return (
+        <div style={{ border: "1px solid black", margin: "2em", padding: "3em", float: "right"  }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Date</TableCell>
+              <TableCell>Viral Load</TableCell>
+              <TableCell>Notes</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {tableRows.map((row, index) => (
+              <TableRow key={index}>
+                <TableCell>{row.date}</TableCell>
+                <TableCell>{row.viralLoad}</TableCell>
+                <TableCell>{row.notes}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
       );
-      
-    }
+    } 
   };
 
   return (
@@ -163,9 +206,11 @@ const PatientPopout = ({ isOpen, handleClose, patient }) => {
         }}
       >
         <Typography variant="h6" gutterBottom>
-          Patient Data
+          Patient Data:
         </Typography>
         <Box sx={{ mb: 2 }}>
+
+
           <Button
             variant="contained"
             color="primary"
@@ -180,6 +225,8 @@ const PatientPopout = ({ isOpen, handleClose, patient }) => {
           >
             Grid View
           </Button>
+
+
           <Button
             variant="contained"
             color="primary"
@@ -193,20 +240,22 @@ const PatientPopout = ({ isOpen, handleClose, patient }) => {
           >
             List View
           </Button>
+
           <Button
             variant="contained"
             color="primary"
-            onClick={handleInputView}
+            onClick={handlePreviousVisitsView}
             sx={{
-              ml: 1,
-              borderColor: viewMode === "input" ? "primary.main" : grey[500],
+              borderColor: viewMode === "previousvisits" ? "primary.main" : grey[500],
               backgroundColor:
-                viewMode === "input" ? "primary.main" : "transparent",
-              color: viewMode === "input" ? "white" : "primary.main",
+                viewMode === "previousvisits" ? "primary.main" : "transparent",
+              color: viewMode === "previousvisits" ? "white" : "primary.main",
             }}
           >
-            Viral Load
+            Previous Visits
           </Button>
+
+
         </Box>
         {renderPatientData()}
       </Box>
@@ -214,4 +263,5 @@ const PatientPopout = ({ isOpen, handleClose, patient }) => {
   );
 };
 
-export default PatientPopout;
+export default PatientPopout_Bavaria;
+export const sendThisToPreviousVisits = PatientPopout_Bavaria.sendThisToPreviousVisits;
