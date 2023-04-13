@@ -1,25 +1,37 @@
 import React from 'react';
-import PreviousVisits from '../components/PreviousVisits_Bavaria';
-import PatientDisplay from '../components/PatientDisplay';
+import Navbar_Bavaria from "../components/Navbar_Bavaria";
+import { useNavigate } from "react-router-dom";
+import TopBanner from "../components/TopBanner";
+import PatientList from "../components/PatientList_Bavaria";
+//import Patients_Bavaria from "./Patients_Bavaria";
 
-const Patients = () => {
+
+
+const Patients_Bavaria = () => {
+  const navigate = useNavigate();
+
+const handleLogout = () => {
+  navigate("/");
+};
+
   return (
 
     <div>
       
-      <div>URL: http://localhost:3000/Patients</div>
-      
-      <div style={{fontSize: "12px"}}>
-          <PatientDisplay/>
+      <TopBanner/>
 
+      <Navbar_Bavaria onLogout={handleLogout} />
+
+
+      <div>
+        <PatientList/>
       </div>
 
       <div>
-        <PreviousVisits />
       </div>
-      
+
     </div>
   )
 }
 
-export default Patients
+export default Patients_Bavaria;

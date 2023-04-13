@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
-import TopBanner from "../components/TopBanner";
-import AddPatient from "../components/AddPatient";
-import useJaneHopkins from "../hooks/useJaneHopkins";
-import PatientTable from "../components/PatientTable";
+import Navbar from "./Navbar";
+import AddPatient from "./AddPatient";
+import PatientTable from "./PatientTable";
 import {
   Button,
   Stack,
@@ -11,17 +9,14 @@ import {
   Box,
   CircularProgress,
 } from "@mui/material";
-import SideBanner from "../components/SideBanner";
-import PatientDisplay from "../components/PatientDisplay";
-import { ApolloProvider } from "@apollo/client";
-import client from "../components/apolloClient";
-import { useNavigate } from "react-router-dom";
-import PatientPopout from "../components/PatientPopout";
-import { signOut } from 'firebase/auth';
-import { auth } from "../firebase-config";
+import SideBanner_Bavaria from "./SideBanner_Bavaria";
+import PatientDisplay from "./PatientDisplay";
+import PatientPopout from "./PatientPopout";
+import PatientPopout_Bavaria from "./PatientPopout_Bavaria";
+import useBavaria from "../hooks/useBavaria";
 
-const JaneHopkinsDoctor = () => {
-  const { entities } = useJaneHopkins();
+const PatientList = () => {
+  const { entities } = useBavaria();
 
   const [loading, setLoading] = useState(true);
 
@@ -57,19 +52,10 @@ const JaneHopkinsDoctor = () => {
     fetchPatients();
   }, [entities]);
 
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await signOut(auth);
-    navigate("/");
-  };
-
   return (
     <div>
-      <TopBanner />
-      <Navbar onLogout={handleLogout} />
       <Stack direction="row">
-        <SideBanner />
+        <SideBanner_Bavaria />
         <Box></Box>
       </Stack>
       <h1>Patient List</h1>
@@ -89,7 +75,7 @@ const JaneHopkinsDoctor = () => {
             patients={patients}
             onPatientClick={handlePatientClick}
           />
-          <PatientPopout
+          <PatientPopout_Bavaria
             isOpen={isPopoutOpen}
             handleClose={handlePopoutClose}
             patient={selectedPatient}
@@ -100,4 +86,4 @@ const JaneHopkinsDoctor = () => {
   );
 };
 
-export default JaneHopkinsDoctor;
+export default PatientList;
