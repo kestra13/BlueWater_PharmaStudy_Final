@@ -12,6 +12,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
+
 } from "@mui/material";
 import { grey } from '@mui/material/colors';
 
@@ -31,6 +32,14 @@ const PatientPopout = ({ isOpen, handleClose, patient }) => {
 
   const handleListView = () => {
     setViewMode("list");
+  };
+
+  const handleInputView = () => {
+    setViewMode("input")
+  };
+
+  const submitData = () => {
+
   };
 
   const renderPatientData = () => {
@@ -109,6 +118,31 @@ const PatientPopout = ({ isOpen, handleClose, patient }) => {
         </Table>
       );
     }
+    else if (viewMode == "input"){
+      return(
+        <Box>
+        <TextField margin="normal" id="standard-basic" label="Viral Load" variant="standard" />
+        <TextField margin="normal" id="standard-notes" label="Notes" variant="standard" />
+        <Button
+            variant="contained"
+            color="primary"
+            onClick={submitData}
+            sx={{
+              mr: 1,
+              borderColor: viewMode === "input" ? "primary.main" : grey[500],
+              backgroundColor:
+                viewMode === "input" ? "primary.main" : "transparent",
+              color: viewMode === "input" ? "white" : "primary.main",
+            }}
+          >
+            Submit
+          </Button>
+        </Box>
+        
+        
+      );
+      
+    }
   };
 
   return (
@@ -158,6 +192,20 @@ const PatientPopout = ({ isOpen, handleClose, patient }) => {
             }}
           >
             List View
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleInputView}
+            sx={{
+              ml: 1,
+              borderColor: viewMode === "input" ? "primary.main" : grey[500],
+              backgroundColor:
+                viewMode === "input" ? "primary.main" : "transparent",
+              color: viewMode === "input" ? "white" : "primary.main",
+            }}
+          >
+            Viral Load
           </Button>
         </Box>
         {renderPatientData()}
