@@ -12,13 +12,13 @@ import {
   TableBody,
   TableRow,
   TableCell,
-
 } from "@mui/material";
-import { grey } from '@mui/material/colors';
-
+import { grey } from "@mui/material/colors";
 
 const PatientPopout = ({ isOpen, handleClose, patient }) => {
   const [viewMode, setViewMode] = useState("grid");
+  const [formData, setFormData] = useState({ ...patient });
+  const [editMode, setEditMode] = useState(false);
 
   console.log("PatientPopout: " + patient);
 
@@ -34,114 +34,160 @@ const PatientPopout = ({ isOpen, handleClose, patient }) => {
     setViewMode("list");
   };
 
+  const handleEditClick = () => {
+    setEditMode(!editMode);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const submitData = () => {
+    // Save the formData here
+    console.log(formData);
+    setEditMode(false);
+  };
+
   const handleInputView = () => {
     setViewMode("input")
   };
 
-  const submitData = () => {
-
-  };
-
+  
   const renderPatientData = () => {
-    if (viewMode === "grid") {
+    if (editMode) {
       return (
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Paper sx={{ p: 2 }}>
-              <Typography variant="subtitle1">Name</Typography>
-              <Typography variant="body2">{patient.name}</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Paper sx={{ p: 2 }}>
-              <Typography variant="subtitle1">Date of Birth</Typography>
-              <Typography variant="body2">{patient.dob}</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Paper sx={{ p: 2 }}>
-              <Typography variant="subtitle1">Insurance Number</Typography>
-              <Typography variant="body2">{patient.insuranceNumber}</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Paper sx={{ p: 2 }}>
-              <Typography variant="subtitle1">Height</Typography>
-              <Typography variant="body2">{patient.height}</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Paper sx={{ p: 2 }}>
-              <Typography variant="subtitle1">Weight</Typography>
-              <Typography variant="body2">{patient.weight}</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Paper sx={{ p: 2 }}>
-              <Typography variant="subtitle1">Blood Pressure</Typography>
-              <Typography variant="body2">{patient.bloodPressure}</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Paper sx={{ p: 2 }}>
-              <Typography variant="subtitle1">Temperature</Typography>
-              <Typography variant="body2">{patient.temperature}</Typography>
-            </Paper>
+          {Object.entries(patient).map(([key, value]) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={key}>
+              <TextField
+                label={key}
+                name={key}
+                value={formData[key]}
+                onChange={handleInputChange}
+                fullWidth
+              />
+            </Grid>
+          ))}
+          <Grid item xs={12}>
+            <Button color="primary" onClick={submitData}>
+              Save
+            </Button>
           </Grid>
         </Grid>
       );
-    } else if (viewMode === "list") {
-      return (
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Date of Birth</TableCell>
-              <TableCell>Insurance Number</TableCell>
-              <TableCell>Height</TableCell>
-              <TableCell>Weight</TableCell>
-              <TableCell>Blood Pressure</TableCell>
-              <TableCell>Temperature</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell>{patient.name}</TableCell>
-              <TableCell>{patient.dob}</TableCell>
-              <TableCell>{patient.insuranceNumber}</TableCell>
-              <TableCell>{patient.height}</TableCell>
-              <TableCell>{patient.weight}</TableCell>
-              <TableCell>{patient.bloodPressure}</TableCell>
-              <TableCell>{patient.temperature}</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      );
-    }
-    else if (viewMode == "input"){
-      return(
-        <Box>
-        <TextField margin="normal" id="standard-basic" label="Viral Load" variant="standard" />
-        <TextField margin="normal" id="standard-notes" label="Notes" variant="standard" />
-        <Button
-            variant="contained"
-            color="primary"
-            onClick={submitData}
-            sx={{
-              mr: 1,
-              borderColor: viewMode === "input" ? "primary.main" : grey[500],
-              backgroundColor:
-                viewMode === "input" ? "primary.main" : "transparent",
-              color: viewMode === "input" ? "white" : "primary.main",
-            }}
-          >
-            Submit
-          </Button>
-        </Box>
-        
-        
-      );
-      
+    } else {
+      if (viewMode === "grid") {
+        return (
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Paper sx={{ p: 2 }}>
+                <Typography variant="subtitle1">Name</Typography>
+                <Typography variant="body2">{patient.name}</Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Paper sx={{ p: 2 }}>
+                <Typography variant="subtitle1">Date of Birth</Typography>
+                <Typography variant="body2">{patient.dob}</Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Paper sx={{ p: 2 }}>
+                <Typography variant="subtitle1">Insurance Number</Typography>
+                <Typography variant="body2">
+                  {patient.insuranceNumber}
+                </Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Paper sx={{ p: 2 }}>
+                <Typography variant="subtitle1">Height</Typography>
+                <Typography variant="body2">{patient.height}</Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Paper sx={{ p: 2 }}>
+                <Typography variant="subtitle1">Weight</Typography>
+                <Typography variant="body2">{patient.weight}</Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Paper sx={{ p: 2 }}>
+                <Typography variant="subtitle1">Blood Pressure</Typography>
+                <Typography variant="body2">{patient.bloodPressure}</Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Paper sx={{ p: 2 }}>
+                <Typography variant="subtitle1">Temperature</Typography>
+                <Typography variant="body2">{patient.temperature}</Typography>
+              </Paper>
+            </Grid>
+            <Button color="primary" onClick={handleEditClick}>
+              Edit
+            </Button>
+          </Grid>
+        );
+      } else if (viewMode === "list") {
+        return (
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Date of Birth</TableCell>
+                <TableCell>Insurance Number</TableCell>
+                <TableCell>Height</TableCell>
+                <TableCell>Weight</TableCell>
+                <TableCell>Blood Pressure</TableCell>
+                <TableCell>Temperature</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>{patient.name}</TableCell>
+                <TableCell>{patient.dob}</TableCell>
+                <TableCell>{patient.insuranceNumber}</TableCell>
+                <TableCell>{patient.height}</TableCell>
+                <TableCell>{patient.weight}</TableCell>
+                <TableCell>{patient.bloodPressure}</TableCell>
+                <TableCell>{patient.temperature}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        );
+      } else if (viewMode == "input") {
+        return (
+          <Box>
+            <TextField
+              margin="normal"
+              id="standard-basic"
+              label="Viral Load"
+              variant="standard"
+            />
+            <TextField
+              margin="normal"
+              id="standard-notes"
+              label="Notes"
+              variant="standard"
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={submitData}
+              sx={{
+                mr: 1,
+                borderColor: viewMode === "input" ? "primary.main" : grey[500],
+                backgroundColor:
+                  viewMode === "input" ? "primary.main" : "transparent",
+                color: viewMode === "input" ? "white" : "primary.main",
+              }}
+            >
+              Submit
+            </Button>
+          </Box>
+        );
+      }
     }
   };
 
