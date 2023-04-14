@@ -14,13 +14,16 @@ import {
   TableCell,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import useJaneHopkins from "../hooks/useJaneHopkins";
 
-const PatientPopout = ({ isOpen, handleClose, patient }) => {
+const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
   const [viewMode, setViewMode] = useState("grid");
   const [formData, setFormData] = useState({ ...patient });
   const [editMode, setEditMode] = useState(false);
 
-  console.log("PatientPopout: " + patient);
+  
+
+  const { entities } = useJaneHopkins();
 
   if (!patient) {
     return null;
@@ -43,22 +46,41 @@ const PatientPopout = ({ isOpen, handleClose, patient }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const submitData = () => {
-    // Save the formData here
-    console.log(formData);
+  const submitData = async () => {
+    try {
+      const updatedPatientData = await entities.Patient.update(formData);
+
+      onUpdatePatient(updatedPatientData);
+
+      setViewMode("grid");
+
+      console.log("Patient update: " + updatedPatientData);
+    } catch (error) {
+      console.error("Error updating patient data: ", error);
+    }
+
+    
     setEditMode(false);
   };
 
   const handleInputView = () => {
-    setViewMode("input")
+    setViewMode("input");
   };
 
-  
   const renderPatientData = () => {
     if (editMode) {
+      const fieldsToDisplay = [
+        "name",
+        "dob",
+        "insuranceNumber",
+        "height",
+        "weight",
+        "bloodPressure",
+        "temperature",
+      ];
       return (
         <Grid container spacing={2}>
-          {Object.entries(patient).map(([key, value]) => (
+          {fieldsToDisplay.map((key) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={key}>
               <TextField
                 label={key}
