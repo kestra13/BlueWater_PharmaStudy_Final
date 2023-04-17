@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import PatientPopout from "../components/PatientPopout";
 import { signOut } from 'firebase/auth';
 import { auth } from "../firebase-config";
+import "../index.css";
 
 const JaneHopkinsDoctor = () => {
   const { entities } = useJaneHopkins();

@@ -11,3 +11,85 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.homePageLoginWindowTitle {
+  padding: 12px;
+  margin: 4px 2px;
+  border: none;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 70px;
+}
+
+.homePageLoginWindow {
+  padding: 12px;
+  margin: 4px 2px;
+  border: none;
+  border-radius: 3px;
+  text-align: center;
+}
+
+::placeholder {
+  color:#003987;
+  opacity: 1;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  text-align: left;
+}
+
+.loginWindowButton {
+  background-color: #7BB4E3;
+  border: none;
+  padding: 12px;
+  border-radius: 3px;
+  margin: auto;
+  text-align: center;
+}
+
+.iconWindowButton {
+  background-color: #caf0f8;
+  border: none;
+  padding: 12px;
+  border-radius: 3px;
+  margin: auto;
+  text-align: center;
+  transition: all .2s ease-in-out; 
+}
+
+button:hover {
+  background-color: #caf0f8;
+  transition-duration: 0.6s;
+
+}
+
+button.active {
+  background-color: #274472;
+}
+
+OrganizationButtons:hover {
+  background-color: #7BB4E3;
+  transition-duration: 0.6s;
+  transform: scale(1.1); 
+
+}
+
+OrganizationButtons {
+  background-color: #274472;
+}
+
+.signOut {
+  background-color: #7BB4E3;
+  border: none;
+  padding: 12px;
+  border-radius: 3px;
+  width: 60%;
+  margin: 0 auto;
+  display: block;
+  float: center;
+  text-align: center;
+}
+
+.loginConfirm {
+  text-align: center;
+  padding: 2px;
+}

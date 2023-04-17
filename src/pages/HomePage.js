@@ -13,6 +13,7 @@ import JHIcon from "../assets/JaneHopkins.jpg";
 import BavariaIcon from "../assets/bavarialogo.jpeg";
 import { Route, Switch } from 'react-router-dom';
 import TopBanner from '../components/TopBanner';
+import "../index.css";
 
 const HomePage = () => {
  

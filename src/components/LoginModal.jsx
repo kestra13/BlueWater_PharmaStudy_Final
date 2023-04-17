@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Stack,
   Typography,
-  IconButton,
+  IconButton
 } from "@mui/material";
 import "./LoginModal.css"
 import CloseIcon from "@mui/icons-material/Close";
@@ -108,6 +108,7 @@ const LoginModal = (props) => {
         <CloseIcon />
       </IconButton>
       <Typography
+        class="homePageLoginWindowTitle"
         align="center"
         variant="h3"
         fontFamily={"Raleway"}
@@ -117,33 +118,33 @@ const LoginModal = (props) => {
       <Stack
         spacing={2}
       >
-        <div>
+        <div class="homePageLoginWindow">
           <h3> Register User </h3>
-          <input
-            placeholder="Email..."
+          <input class="homePageLoginWindow"
+            placeholder="Username..."
             onChange={(event) => {
-              setRegisterEmail(event.target.value);
+              setRegisterPassword(event.target.value);
             }}
           />
-          <input
+          <input class="homePageLoginWindow"
             placeholder="Password..."
             onChange={(event) => {
               setRegisterPassword(event.target.value);
             }}
           />
 
-          <button onClick={register}> Create User</button>
+          <button class="loginWindowButton" onClick={register}> Create User</button>
         </div>
 
-        <div>
+        <div class="homePageLoginWindow">
           <h3> Login </h3>
-          <input
+          <input class="homePageLoginWindow"
             placeholder="Email..."
             onChange={(event) => {
               setLoginEmail(event.target.value);
             }}
           />
-          <input
+          <input class="homePageLoginWindow"
             placeholder="Password..."
             type="password"
             onChange={(event) => {
@@ -151,13 +152,13 @@ const LoginModal = (props) => {
             }}
           />
 
-          <button onClick={login}> Login</button>
+          <button class="loginWindowButton" onClick={login}> Login</button>
+
+          <h4 class="loginConfirm"> User Logged In: </h4>
+          <p class="loginConfirm"> {user ? user.email : "Not Logged In"} </p>
+
+          <button class="signOut" onClick={logout}> Sign Out </button>
         </div>
-
-        <h4> User Logged In: </h4>
-        {user ? user.email : "Not Logged In"}
-
-        <button onClick={logout}> Sign Out </button>
       </Stack>
       
     </div>
