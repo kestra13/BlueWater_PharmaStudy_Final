@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Modal,
   Box,
@@ -21,7 +21,22 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
   const [formData, setFormData] = useState({ ...patient });
   const [editMode, setEditMode] = useState(false);
 
-  
+  const fieldsToDisplay = [
+    "name",
+    "dob",
+    "insuranceNumber",
+    "height",
+    "weight",
+    "bloodPressure",
+    "temperature",
+  ];
+
+  const wrapperRef = useRef(null);
+  useOutsideClick(wrapperRef, () => {
+    setFormData({...patient});
+    handleClose();
+    setEditMode(!editMode);
+  });
 
   const { entities } = useJaneHopkins();
 
@@ -46,6 +61,20 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+  function useOutsideClick(ref, onOutsideClick) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          onOutsideClick();
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref, onOutsideClick]);
+  }
+
   const submitData = async () => {
     try {
       const updatedPatientData = await entities.Patient.update(formData);
@@ -59,7 +88,6 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
       console.error("Error updating patient data: ", error);
     }
 
-    
     setEditMode(false);
   };
 
@@ -69,15 +97,6 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
 
   const renderPatientData = () => {
     if (editMode) {
-      const fieldsToDisplay = [
-        "name",
-        "dob",
-        "insuranceNumber",
-        "height",
-        "weight",
-        "bloodPressure",
-        "temperature",
-      ];
       return (
         <Grid container spacing={2}>
           {fieldsToDisplay.map((key) => (
@@ -216,6 +235,7 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
   return (
     <Modal open={isOpen} onClose={handleClose}>
       <Box
+      ref = {wrapperRef}
         sx={{
           position: "absolute",
           top: "50%",
