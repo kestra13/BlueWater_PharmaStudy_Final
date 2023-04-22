@@ -6,10 +6,13 @@ import Drugs from "./FDA/Drugs";
 import Study from "./FDA/Study";
 import Patients from "./FDA/Patients";
 import { Route, Routes } from "react-router-dom";
+import { signOut } from 'firebase/auth';
+import { auth } from "../firebase-config";
 
 const FDAHome = () => {
   const navigate = useNavigate();
-	const handleLogout = () => {
+	const handleLogout = async () => {
+		await signOut(auth);
 		navigate("/");
 	};
 	return (

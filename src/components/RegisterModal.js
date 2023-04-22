@@ -12,8 +12,6 @@ const RegisterModal = (props) => {
 
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
-    // const [loginEmail, setLoginEmail] = useState("");
-    // const [loginPassword, setLoginPassword] = useState("");
 
     const [user, setUser] = useState({});
 
@@ -36,50 +34,6 @@ const RegisterModal = (props) => {
         console.log(error.message);
         }
     };
-
-    // const login = async () => {
-    //     try {
-    //     const user = await signInWithEmailAndPassword(
-    //         auth,
-    //         loginEmail,
-    //         loginPassword
-    //     );
-    //     console.log(user);
-    //     } catch (error) {
-    //     console.log(error.message);
-    //     }
-
-    //     if (user && props.name === "FDA") {
-    //     navigate("/FDAHome");
-    //     }
-
-    //     if (user && props.name === "Jane Hopkins") {
-    //     navigate("/JaneHopkinsDoctor");
-    //     }
-
-    //     if (user && props.name === "Bavaria") {
-    //     navigate("/BavariaHome");
-    //     }
-        
-    //     // else if (props.name === "FDA") {
-    //     //   event.preventDefault();
-    //         // navigate("/FDA/Patients");
-    //     // }
-    // };
-
-    // const logout = async () => {
-    //     await signOut(auth);
-    // };
-
-    // const handleSubmit = (event) => {
-    //   if (props.name === "Jane Hopkins") {
-    //     event.preventDefault();
-    //     navigate("/JaneHopkinsDoctor");
-    //   } else if (props.name === "Bavaria") {
-    //     event.preventDefault();
-    //     navigate("/BavariaHome");
-    //   }
-    // };
 
     const { onClose } = props;
 
@@ -139,32 +93,9 @@ const RegisterModal = (props) => {
                     <button onClick={register}> Create User</button>
                 </div>
 
-                {/* <h4> Register a user above. </h4> */}
-                <h4>{user ? "User created. Go to login window and login."  : "Register a user above."}</h4>
-
-              {/* <div>
-                <h2> Login </h2>
-                <input
-                  placeholder="Email..."
-                  onChange={(event) => {
-                    setLoginEmail(event.target.value);
-                  }}
-                />
-                <input
-                  placeholder="Password..."
-                  type="password"
-                  onChange={(event) => {
-                    setLoginPassword(event.target.value);
-                  }}
-                />
-
-                <button onClick={login}> Login</button>
-              </div>
-
-              <h4>Current User Logged In: </h4>
-              {user ? user.email : "Not Logged In"}
-
-              <button onClick={logout}> Sign Out </button> */}
+                <h4> Register a user above. After doing so,
+                proceed to Login window to access pages. </h4>
+                {/* <h4>{user ? "User created. Go to login window and login."  : "Register a user above."}</h4> */}
             </Stack>
           </Stack>
         </Box>   

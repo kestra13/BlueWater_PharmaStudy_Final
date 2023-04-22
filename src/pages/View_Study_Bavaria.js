@@ -3,12 +3,15 @@ import Patients_Display from '../components/Patients_Display_Bavaria';
 import Navbar_Bavaria from "../components/Navbar_Bavaria";
 import TopBanner from "../components/TopBanner";
 import { useNavigate } from "react-router-dom";
+import { signOut } from 'firebase/auth';
+import { auth } from "../firebase-config";
 
 
   const View_Study = () => {
     const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await signOut(auth);
     navigate("/");
   };
 

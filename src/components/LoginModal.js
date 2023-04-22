@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Modal, Stack, IconButton } from "@mui/material";
 import "./LoginModal.css";
 import CloseIcon from "@mui/icons-material/Close";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
@@ -13,10 +13,8 @@ import "./LoginModal.css"
 
 const LoginModal = (props) => {
 
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const [registerEmail, setRegisterEmail] = useState("");
-  // const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
@@ -28,19 +26,6 @@ const LoginModal = (props) => {
     });
 
   }, []);
-
-  // const register = async () => {
-  //   try {
-  //     const user = await createUserWithEmailAndPassword(
-  //       auth,
-  //       registerEmail,
-  //       registerPassword
-  //     );
-  //     console.log(user);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
 
   const login = async () => {
     try {
@@ -54,22 +39,21 @@ const LoginModal = (props) => {
       console.log(error.message);
     }
 
-    // if (user && props.name === "FDA") {
-    //   navigate("/FDAHome");
-    // }
+    const allowedDomains = ['fda.com', 'janehopkins.com', 'bavaria.com'];
 
-    // if (user && props.name === "Jane Hopkins") {
-    //   navigate("/JaneHopkinsDoctor");
-    // }
+    const detectedEmail = loginEmail.split('@')[1];
 
-    // if (user && props.name === "Bavaria") {
-    //   navigate("/BavariaHome");
-    // }
-    
-    // else if (props.name === "FDA") {
-    //   event.preventDefault();
-		// navigate("/FDA/Patients");
-    // }
+    if (allowedDomains.includes(detectedEmail)) {
+      if (detectedEmail === 'fda.com') {
+        navigate("/FDAHome");
+      }
+      else if (detectedEmail === 'janehopkins.com') {
+        navigate("/JaneHopkinsDoctor");
+      }
+      else if (detectedEmail === 'bavaria.com') {
+        navigate("/BavariaHome");
+      }
+    }
   };
 
   const logout = async () => {
@@ -116,24 +100,6 @@ const LoginModal = (props) => {
             spacing={2}
           >
             <Stack>
-              {/* <div>
-                <h3> Register User </h3>
-                <input
-                  placeholder="Email..."
-                  onChange={(event) => {
-                    setRegisterEmail(event.target.value);
-                  }}
-                />
-                <input
-                  placeholder="Password..."
-                  onChange={(event) => {
-                    setRegisterPassword(event.target.value);
-                  }}
-                />
-
-                <button onClick={register}> Create User</button>
-              </div> */}
-
               <div>
                 <h2> Login </h2>
                 <input
@@ -166,3 +132,20 @@ const LoginModal = (props) => {
 };
 
 export default LoginModal;
+
+// if (user && props.name === "FDA") {
+    //   navigate("/FDAHome");
+    // }
+
+    // if (user && props.name === "Jane Hopkins") {
+    //   navigate("/JaneHopkinsDoctor");
+    // }
+
+    // if (user && props.name === "Bavaria") {
+    //   navigate("/BavariaHome");
+    // }
+    
+    // else if (props.name === "FDA") {
+    //   event.preventDefault();
+		// navigate("/FDA/Patients");
+    // }
