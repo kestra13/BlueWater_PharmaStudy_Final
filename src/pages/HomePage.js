@@ -1,22 +1,9 @@
 import React from 'react';
-import OrganizationButtons from "../components/OrganizationButtons";
-import {
-  Button,
-  Stack,
-  TextField,
-  Typography,
-  IconButton,
-  AppBar, Toolbar
-} from "@mui/material";
-import FDAIcon from "../assets/fda-logo.jpeg";
-import JHIcon from "../assets/JaneHopkins.jpg";
-import BavariaIcon from "../assets/bavarialogo.jpeg";
-import { Route, Switch } from 'react-router-dom';
+import { Stack, Typography } from "@mui/material";
 import TopBanner from '../components/TopBanner';
+import LoginAndRegisterButtons from '../components/LoginAndRegisterButtons';
 
 const HomePage = () => {
- 
-
   return (
     <div style={{ height: "100vh" }} className="App">
       <TopBanner/>
@@ -28,16 +15,20 @@ const HomePage = () => {
           align = "center"
           variant = "h4"
         >
-          Welcome. Choose an organization below to login.
+          Welcome. Login or register below to get started.
         </Typography>
       <Stack sx={{ pt: 10 }}
         direction = "row"
         justifyContent= "center"
         spacing = {7.5}
       >
-        <OrganizationButtons name = "FDA" logo = {FDAIcon} />
+        <LoginAndRegisterButtons />
+       
+        {/* <OrganizationButtons name = "FDA" logo = {FDAIcon} />
         <OrganizationButtons name = "Jane Hopkins" logo = {JHIcon} />
-        <OrganizationButtons name = "Bavaria" logo = {BavariaIcon} />
+        <OrganizationButtons name = "Bavaria" logo = {BavariaIcon} /> */}
+        {/* <OrganizationButtons name = "Login" />
+        <OrganizationButtons name = "Register" /> */}
 
       </Stack>
     </div>
