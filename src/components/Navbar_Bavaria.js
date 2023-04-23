@@ -1,9 +1,10 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import logo from "../assets/bavarialogo.jpg";
-import Patients_Bavaria from "../pages/Patients_Bavaria";
-import View_Study from "../pages/View_Study_Bavaria";
-import Shipment_Page from "../pages/Shipment_Page_Bavaria";
+import Patients_Bavaria from "../pages/Bavaria/Patients_Bavaria";
+import View_Study from "../pages/Bavaria/View_Study_Bavaria";
+import Shipment_Page from "../pages/Bavaria/Shipment_Page_Bavaria";
+import logoutImg from '../assets/logout.png';
 import { Route, Routes, Link } from "react-router-dom";
 
 const Navbar_Bavaria = ({ onLogout }) => {
@@ -18,7 +19,7 @@ const Navbar_Bavaria = ({ onLogout }) => {
 
           <Button color="inherit"
           component={Link}
-          to="/BavariaHome"
+          to="/Bavaria/"
           >
             Patient View
           </Button>
@@ -37,7 +38,8 @@ const Navbar_Bavaria = ({ onLogout }) => {
           </Button>
 
           <Button color="inherit" onClick={onLogout}>
-              Logout
+          <img src={logoutImg} alt="Logout" style={{ width: '2em', height: '2em' }} />
+      Logout
           </Button>
         </Toolbar>
       </AppBar>

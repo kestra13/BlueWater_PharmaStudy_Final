@@ -1,7 +1,7 @@
 import React from 'react';
-import Patients_Display from '../components/Patients_Display_Bavaria';
-import Navbar_Bavaria from "../components/Navbar_Bavaria";
-import TopBanner from "../components/TopBanner";
+import Patients_Display from '../../components/Patients_Display_Bavaria';
+import Navbar_Bavaria from "../../components/Navbar_Bavaria";
+import TopBanner from "../../components/TopBanner";
 import { useNavigate } from "react-router-dom";
 import { signOut } from 'firebase/auth';
 import { auth } from "../firebase-config";
