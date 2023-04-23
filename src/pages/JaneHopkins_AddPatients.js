@@ -12,11 +12,14 @@ import {
   Grid,
   Paper,
 } from "@mui/material";
+import { signOut } from 'firebase/auth';
+import { auth } from "../firebase-config";
 
 const JHAddPatient = () => {
   const navigate = useNavigate();
-  const handleLogout = () => {
-    // Handle logout logic here
+  const handleLogout = async () => {
+    await signOut(auth);
+    navigate("/");
   };
 
   const handleSubmit = (e) => {
