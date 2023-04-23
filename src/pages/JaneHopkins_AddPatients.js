@@ -15,9 +15,23 @@ import {
 import { signOut } from 'firebase/auth';
 import { auth } from "../firebase-config";
 import useJaneHopkins from "../hooks/useJaneHopkins";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+
 
 const JHAddPatient = () => {
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
 
   const { entities } = useJaneHopkins();
 
@@ -38,17 +52,29 @@ const JHAddPatient = () => {
     e.preventDefault();
 
     const firstName = e.target.elements.firstName.value;
-  const lastName = e.target.elements.lastName.value;
-  const address = e.target.elements.address.value;
-  const dob = formatDate(e.target.elements.dob.value);
-  const insuranceNumber = e.target.elements.insuranceNumber.value;
-  const name = firstName + ' ' + lastName;
+    const lastName = e.target.elements.lastName.value;
+    const address = e.target.elements.address.value;
+    const dob = formatDate(e.target.elements.dob.value);
+    const insuranceNumber = e.target.elements.insuranceNumber.value;
+    const name = firstName + ' ' + lastName;
+
+    //Function to reset the form after the patient has been added successfully
+    const resetForm = () => {
+      e.target.elements.firstName.value = '';
+      e.target.elements.lastName.value = '';
+      e.target.elements.address.value = '';
+      e.target.elements.dob.value = '';
+      e.target.elements.insuranceNumber.value = '';
+    };
+
 
     try {
       const response = await entities.patient.add({
-        name,address,insuranceNumber, dob, 
+        name, address, insuranceNumber, dob,
       });
       console.log("New Patient added:", response);
+      handleOpen();
+      resetForm();
 
     } catch (error) {
       console.error("Error adding patient: ", error);
@@ -72,7 +98,7 @@ const JHAddPatient = () => {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                  name = "firstName"
+                    name="firstName"
                     label="First Name"
                     variant="outlined"
                     fullWidth
@@ -81,17 +107,17 @@ const JHAddPatient = () => {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                  name = "lastName"
+                    name="lastName"
                     label="Last Name"
                     variant="outlined"
                     fullWidth
                     required
                   />
                 </Grid>
-                
+
                 <Grid item xs={12}>
                   <TextField
-                  name = "address"
+                    name="address"
                     label="Address"
                     variant="outlined"
                     fullWidth
@@ -100,7 +126,7 @@ const JHAddPatient = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                  name = "dob"
+                    name="dob"
                     label="Date of Birth"
                     type="date"
                     variant="outlined"
@@ -113,7 +139,7 @@ const JHAddPatient = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                  name = "insuranceNumber"
+                    name="insuranceNumber"
                     label="Insurance Number"
                     variant="outlined"
                     fullWidth
@@ -135,6 +161,19 @@ const JHAddPatient = () => {
           </Box>
         </Paper>
       </Container>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>{"Patient Added"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            The patient has been added successfully.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
