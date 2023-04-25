@@ -21,6 +21,10 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
   const [formData, setFormData] = useState({ ...patient });
   const [editMode, setEditMode] = useState(false);
 
+  useEffect(() => {
+    setFormData({...patient});
+  }, [patient]);
+
   const fieldsToDisplay = [
     "name",
     "dob",
@@ -35,7 +39,7 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
   useOutsideClick(wrapperRef, () => {
     setFormData({...patient});
     handleClose();
-    setEditMode(!editMode);
+    setEditMode(false);
   });
 
   const { entities } = useJaneHopkins();
