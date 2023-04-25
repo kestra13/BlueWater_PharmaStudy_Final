@@ -12,8 +12,11 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  IconButton,
+
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import DeleteIcon from '@mui/icons-material/Delete';
 import useJaneHopkins from "../hooks/useJaneHopkins";
 
 const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
@@ -21,8 +24,24 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
   const [formData, setFormData] = useState({ ...patient });
   const [editMode, setEditMode] = useState(false);
 
+  const { entities } = useJaneHopkins();
+
+  const handleDeleteClick = async () => {
+    if (window.confirm("Are you sure you want to delete this patient? This action cannot be undone.")) {
+      try {
+        await entities.patient.remove(patient._id);
+        console.log("Patient deleted");
+        handleClose(); 
+        onUpdatePatient(); 
+      } catch (error) {
+        console.error("Error deleting patient data: ", error);
+      }
+    }
+  };
+  
+
   useEffect(() => {
-    setFormData({...patient});
+    setFormData({ ...patient });
   }, [patient]);
 
   const fieldsToDisplay = [
@@ -37,12 +56,12 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
 
   const wrapperRef = useRef(null);
   useOutsideClick(wrapperRef, () => {
-    setFormData({...patient});
+    setFormData({ ...patient });
     handleClose();
     setEditMode(false);
   });
 
-  const { entities } = useJaneHopkins();
+  
 
   if (!patient) {
     return null;
@@ -172,6 +191,9 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
             <Button color="primary" onClick={handleEditClick}>
               Edit
             </Button>
+            <IconButton color="secondary" onClick={handleDeleteClick}>
+              <DeleteIcon />
+            </IconButton>
           </Grid>
         );
       } else if (viewMode === "list") {
@@ -239,7 +261,7 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
   return (
     <Modal open={isOpen} onClose={handleClose}>
       <Box
-      ref = {wrapperRef}
+        ref={wrapperRef}
         sx={{
           position: "absolute",
           top: "50%",

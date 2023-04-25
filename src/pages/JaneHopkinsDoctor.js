@@ -32,6 +32,17 @@ const JaneHopkinsDoctor = () => {
 
   const [patients, setPatients] = useState([]);
 
+  const fetchPatients = async () => {
+    try {
+      const response = await entities.patient.list();
+      //console.log("Response:", response);
+      setPatients(response.items);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching patients:", error);
+    }
+  };
+
   const handlePatientClick = (patient) => {
     setSelectedPatient(patient);
     setIsPopoutOpen(true);
@@ -43,16 +54,7 @@ const JaneHopkinsDoctor = () => {
   };
 
   useEffect(() => {
-    const fetchPatients = async () => {
-      try {
-        const response = await entities.patient.list();
-        //console.log("Response:", response);
-        setPatients(response.items);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching patients:", error);
-      }
-    };
+    
 
     fetchPatients();
   }, [entities]);
@@ -93,6 +95,7 @@ const JaneHopkinsDoctor = () => {
             isOpen={isPopoutOpen}
             handleClose={handlePopoutClose}
             patient={selectedPatient}
+            onUpdatePatient = {fetchPatients}
           />
         </>
       )}

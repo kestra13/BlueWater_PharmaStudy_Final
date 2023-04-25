@@ -61,6 +61,10 @@ const JHAddPatient = () => {
     const systolicPressure = e.target.elements.systolicPressure.value;
     const diastolicPressure = e.target.elements.diastolicPressure.value;
     const bloodPressure = systolicPressure + '/' + diastolicPressure + " mmHg";
+    const bloodType = e.target.elements.bloodType.value;
+    const temperature = e.target.elements.temperature.value;
+    const oxygenSaturation = e.target.elements.oxygenSaturation.value;
+
     const name = firstName + ' ' + lastName;
 
     //Function to reset the form after the patient has been added successfully
@@ -74,12 +78,17 @@ const JHAddPatient = () => {
       e.target.elements.weight.value = '';
       e.target.elements.systolicPressure.value = '';
       e.target.elements.diastolicPressure.value = '';
+      e.target.elements.temperature.value = '';
+      e.target.elements.bloodType.value = '';
+      e.target.elements.oxygenSaturation.value = '';
+
+
     };
 
 
     try {
       const response = await entities.patient.add({
-        name, address, insuranceNumber, dob, height, weight, bloodPressure,
+        name, address, insuranceNumber, dob, height, weight, bloodPressure,bloodType,temperature, oxygenSaturation,
       });
       console.log("New Patient added:", response);
       handleOpen();
@@ -201,8 +210,7 @@ const JHAddPatient = () => {
                   <TextField
                     name="bloodType"
                     label="Blood Type"
-                    type="number"
-                    variant="outlined"
+                     variant="outlined"
                     fullWidth
                     required
                   />
