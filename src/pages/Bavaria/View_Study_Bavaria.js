@@ -4,7 +4,8 @@ import Navbar_Bavaria from "../../components/Navbar_Bavaria";
 import TopBanner from "../../components/TopBanner";
 import { useNavigate } from "react-router-dom";
 import { signOut } from 'firebase/auth';
-import { auth } from "../firebase-config";
+import { auth } from "../../firebase-config";
+import ReactToPdf from "../../components/ReactToPdf";
 
 
   const View_Study = () => {
@@ -18,20 +19,22 @@ import { auth } from "../firebase-config";
   return (
 
     <div>
-      <TopBanner/>
+      <TopBanner />
 
       <Navbar_Bavaria onLogout={handleLogout} />
 
 
 
-      
-        <div style={{textAlign: "left", fontSize: "12px"}}>
-          <h1>Ongoing Study: Study_name</h1>
-          <h1>Shipment History: [50] drug_name vs [50] Placebo Shipment Date</h1>
-        </div>
 
 
-          <Patients_Display />
+
+      <div style={{padding: "2em"}}>
+        <Patients_Display />
+
+        <p></p>
+        <ReactToPdf />
+      </div>
+    
       
 
       

@@ -62,6 +62,10 @@ const Patients_Display = ({ isOpen, handleClose, patient }) => {
           console.log(drugResponse.items[i]);
 
           rows.push({
+            studyName: drugResponse.items[i].studyName,
+            studyStatus: drugResponse.items[i].studyStatus,
+            shipmentHistory: drugResponse.items[i].shipmentHistory,
+            drugType: drugResponse.items[i].drugType,
             uuID: drugResponse.items[i].id,
             placebo: drugResponse.items[i].placebo,
             batchNumber: drugResponse.items[i].batchNumber
@@ -70,6 +74,8 @@ const Patients_Display = ({ isOpen, handleClose, patient }) => {
 
 
         setTableRows(rows);
+
+        console.log(rows);
 
         setLoading(false);
       } catch (error) {
@@ -103,6 +109,11 @@ const Patients_Display = ({ isOpen, handleClose, patient }) => {
                 <TableCell style={{fontSize: 30}}>Patient uuID: {row.uuID}</TableCell>
                 <TableCell style={{fontSize: 30}}>Dosage information: {row.placebo}</TableCell>
                 <TableCell style={{fontSize: 30}}>Type of Drug: {row.batchNumber}</TableCell>
+
+                <TableCell style={{fontSize: 30}}>Study Name: {row.studyName}</TableCell>
+                <TableCell style={{fontSize: 30}}>Drug Name: {row.drugType}</TableCell>
+                <TableCell style={{fontSize: 30}}>Shipment history: {row.shipmentHistory}</TableCell>
+                <TableCell style={{fontSize: 30}}>Study Status: {row.studyStatus}</TableCell>
               </TableRow>
             ))}
       

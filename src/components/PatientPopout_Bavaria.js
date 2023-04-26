@@ -13,7 +13,7 @@ import {
   TableRow,
   TableCell,
 } from "@mui/material";
-import { grey } from '@mui/material/colors';
+import { grey, yellow } from '@mui/material/colors';
 import useBavaria from "../hooks/useBavaria";
 
 export const PatientPopout_Bavaria = ({ isOpen, handleClose, patient }) => {
@@ -88,13 +88,18 @@ export const PatientPopout_Bavaria = ({ isOpen, handleClose, patient }) => {
   };
 
   const renderPatientData = () => {
+    /*
+    <TableCell>{row.date}</TableCell>
+                <TableCell>{row.viralLoad}</TableCell>
+                <TableCell style={{backgroundColor: "red"}}>[Notes Redacated]</TableCell> {row.notes
+                */
     if (viewMode === "grid") {
       return (
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <Paper sx={{ p: 2 }}>
               <Typography variant="subtitle1">Name</Typography>
-              <Typography variant="body2">{patient.name}</Typography>
+              <Typography variant="body2" style={{backgroundColor: "yellow"}}>Redacted</Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -106,7 +111,7 @@ export const PatientPopout_Bavaria = ({ isOpen, handleClose, patient }) => {
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <Paper sx={{ p: 2 }}>
               <Typography variant="subtitle1">Insurance Number</Typography>
-              <Typography variant="body2">{patient.insuranceNumber}</Typography>
+              <Typography variant="body2" style={{backgroundColor: "yellow"}}>Redacted</Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -151,9 +156,9 @@ export const PatientPopout_Bavaria = ({ isOpen, handleClose, patient }) => {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell>{patient.name}</TableCell>
+              <TableCell style={{backgroundColor: "yellow"}}>Redacted</TableCell>
               <TableCell>{patient.dob}</TableCell>
-              <TableCell>{patient.insuranceNumber}</TableCell>
+              <TableCell style={{backgroundColor: "yellow"}}>Redacted</TableCell>
               <TableCell>{patient.height}</TableCell>
               <TableCell>{patient.weight}</TableCell>
               <TableCell>{patient.bloodPressure}</TableCell>
@@ -177,8 +182,8 @@ export const PatientPopout_Bavaria = ({ isOpen, handleClose, patient }) => {
             {tableRows.map((row, index) => (
               <TableRow key={index}>
                 <TableCell>{row.date}</TableCell>
-                <TableCell>{row.viralLoad}</TableCell>
-                <TableCell>{row.notes}</TableCell>
+                <TableCell style={{backgroundColor: "pink"}}>Redacted - study pending</TableCell>
+                <TableCell style={{backgroundColor: "pink"}}>Redacted - study pending</TableCell>
               </TableRow>
             ))}
           </TableBody>

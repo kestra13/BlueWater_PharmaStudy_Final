@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import AddPatient from "./AddPatient";
-import PatientTable from "./PatientTable";
+import PatientTable from "./PatientTable_FDABavaria";
 import {
   Button,
   Stack,
@@ -10,7 +10,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import SideBanner_Bavaria from "./SideBanner_FDA";
-import PatientDisplay from "./PatientDisplay";
+import PatientDisplay from "./PatientDisplay_FDABavaria";
 import PatientPopout from "./PatientPopout";
 import PatientPopout_Bavaria from "./PatientPopout_Bavaria";
 import useBavaria from "../hooks/useBavaria";

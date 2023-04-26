@@ -4,7 +4,7 @@ import Navbar_Bavaria from "../../components/Navbar_Bavaria";
 import TopBanner from "../../components/TopBanner";
 import { useNavigate } from "react-router-dom";
 import { signOut } from 'firebase/auth';
-import { auth } from "../firebase-config";
+import { auth } from "../../firebase-config";
 
 
 const Shipment_Page = () => {
@@ -23,6 +23,8 @@ const handleLogout = async () => {
       <Navbar_Bavaria onLogout={handleLogout} />   
 
       <Send_Samples/>
+
+     
     </div>
   )
 }

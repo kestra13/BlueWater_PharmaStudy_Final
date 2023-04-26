@@ -46,7 +46,7 @@ const Navbar_Bavaria = ({ onLogout }) => {
       </Box>
 
       <Routes>
-        <Route path="/BavariaHome" element={<Patients_Bavaria />} />
+        <Route path="/Bavaria" element={<Patients_Bavaria />} />
         <Route path="/View_Study" element={<View_Study />} />
         <Route path="/Shipment_Page" element={<Shipment_Page />} />
       </Routes>

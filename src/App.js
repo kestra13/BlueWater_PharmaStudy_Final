@@ -25,13 +25,7 @@ function App() {
 
   return (
     <div>
-<<<<<<< Updated upstream
-      <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route path="/FDAHome" element={<FDAHome />} />
-        <Route path="/JaneHopkinsDoctor" element={<JaneHopkinsDoctor />} />
-=======
-        <Routes>
+<Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route path="/FDAHome" element={<FDAHome />} />
           <Route path="/JaneHopkinsDoctor" element={<JaneHopkinsDoctor />} />
@@ -41,21 +35,12 @@ function App() {
           <Route path="/View_Study" element={<View_Study />} />
           <Route path="/Shipment_Page" element={<Shipment_Page />} />
 
-		  <Route path="/FDA/*" element={<FDAHome />} />
+		      <Route path="/FDA/*" element={<FDAHome />} />
 	
 	  		
->>>>>>> Stashed changes
 
-        <Route path="/BavariaHome" element={<BavariaHome />} />
-        <Route path="/Patients_Bavaria" element={<Patients_Bavaria />} />
-        <Route path="/View_Study" element={<View_Study />} />
-        <Route path="/Shipment_Page" element={<Shipment_Page />} />
-        <Route path="/FDA/*" element={<FDAHome />} />
-        <Route path="/JaneHopkins_AddPatients" element={<JHAddPatient />} />
-
-
-
-      </Routes>
+          <Route path="/JaneHopkins_AddPatients" element={<JHAddPatient />} />
+          </Routes>
     </div>
   );
 }
