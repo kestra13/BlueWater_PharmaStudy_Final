@@ -5,9 +5,31 @@ import { useNavigate } from "react-router-dom";
 import Drugs from "./FDA/Drugs";
 import Study from "./FDA/Study";
 import Patients from "./FDA/Patients";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { signOut } from 'firebase/auth';
 import { auth } from "../firebase-config";
+import { useAuthState } from 'react-firebase-hooks/auth';
+// import RouteProtect from '../components/RoutingProtect';
+
+const RouteProtect = (allowedDomains, Component) => {
+	const GuardedComponent = ({ ...props }) => {
+	  const [user] = useAuthState(auth);
+  
+	  if (!user) {
+		return <Navigate to="/" />;
+	  }
+  
+	  const domain = user.email.split("@")[1];
+  
+	  if (!allowedDomains.includes(domain)) {
+		return <Navigate to="/" />;
+	  }
+  
+	  return <Component {...props} />;
+	};
+  
+	return GuardedComponent;
+  };
 
 const FDAHome = () => {
   const navigate = useNavigate();
@@ -29,4 +51,4 @@ const FDAHome = () => {
 	)
 }
 
-export default FDAHome
+export default RouteProtect(["fda.com"], FDAHome);

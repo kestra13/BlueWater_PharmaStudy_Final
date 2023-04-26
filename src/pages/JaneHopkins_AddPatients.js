@@ -14,6 +14,28 @@ import {
 } from "@mui/material";
 import { signOut } from 'firebase/auth';
 import { auth } from "../firebase-config";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useAuthState } from 'react-firebase-hooks/auth';
+
+const RouteProtect = (allowedDomains, Component) => {
+  const GuardedComponent = ({ ...props }) => {
+    const [user] = useAuthState(auth);
+
+    if (!user) {
+      return <Navigate to="/" />;
+    }
+
+    const domain = user.email.split("@")[1];
+
+    if (!allowedDomains.includes(domain)) {
+      return <Navigate to="/" />;
+    }
+
+    return <Component {...props} />;
+  };
+
+  return GuardedComponent;
+};
 
 const JHAddPatient = () => {
   const navigate = useNavigate();
@@ -100,4 +122,4 @@ const JHAddPatient = () => {
   );
 };
 
-export default JHAddPatient;
+export default RouteProtect(["janehopkins.com"], JHAddPatient);

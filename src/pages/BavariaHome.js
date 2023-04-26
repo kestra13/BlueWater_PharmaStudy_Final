@@ -6,6 +6,30 @@ import Patients_Bavaria from "./Patients_Bavaria";
 import View_Study from "./View_Study_Bavaria";
 import Shipment_Page from "./Shipment_Page_Bavaria";
 import TopBanner from "../components/TopBanner";
+// import RouteProtect from "../components/RoutingProtect";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Navigate } from 'react-router-dom';
+import { auth } from "../firebase-config";
+
+const RouteProtect = (allowedDomains, Component) => {
+  const GuardedComponent = ({ ...props }) => {
+    const [user] = useAuthState(auth);
+
+    if (!user) {
+      return <Navigate to="/" />;
+    }
+
+    const domain = user.email.split("@")[1];
+
+    if (!allowedDomains.includes(domain)) {
+      return <Navigate to="/" />;
+    }
+
+    return <Component {...props} />;
+  };
+
+  return GuardedComponent;
+};
 
 const BavariaHome = () => {
   return (
@@ -49,4 +73,4 @@ const BavariaHome = () => {
   );
 };
 
-export default BavariaHome;
+export default RouteProtect(["bavaria.com"], BavariaHome);

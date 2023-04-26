@@ -10,8 +10,14 @@ import {
 } from 'firebase/auth';
 import { auth } from "../firebase-config";
 import "./LoginModal.css"
+import HomePage from "../pages/HomePage";
+import App from "../App";
+import FDAHome from "../pages/FDAHome";
+import JaneHopkinsDoctor from "../pages/JaneHopkinsDoctor";
+import BavariaHome from "../pages/BavariaHome";
+import RouteProtect from "./RoutingProtect";
 
-const LoginModal = (props) => {
+const LoginModal = (props, { onLogin }) => {
 
   const navigate = useNavigate();
 
@@ -35,25 +41,32 @@ const LoginModal = (props) => {
         loginPassword
       );
       console.log(user);
+      const detectedEmail = loginEmail.split('@')[1];
+
+      // if (allowedDomains.includes(detectedEmail)) {
+        if (detectedEmail === 'fda.com') {
+          navigate("/FDAHome");
+          // return <FDAHome userEmail={detectedEmail} />
+        }
+        else if (detectedEmail === 'janehopkins.com') {
+          navigate("/JaneHopkinsDoctor");
+          // return <JaneHopkinsDoctor userEmail={detectedEmail}/>
+        }
+        else if (detectedEmail === 'bavaria.com') {
+          navigate("/BavariaHome");
+          // RouteProtect(['bavaria.com'], BavariaHome, detectedEmail);
+          // return <WrappedComponentWithAuth userEmail={detectedEmail} />;
+          // return <BavariaHome userEmail={detectedEmail}/>
+        }
+      // }
+      // return <App userEmail={loginEmail} />;
     } catch (error) {
       console.log(error.message);
     }
 
-    const allowedDomains = ['fda.com', 'janehopkins.com', 'bavaria.com'];
+    // const allowedDomains = ['fda.com', 'janehopkins.com', 'bavaria.com'];
 
-    const detectedEmail = loginEmail.split('@')[1];
-
-    if (allowedDomains.includes(detectedEmail)) {
-      if (detectedEmail === 'fda.com') {
-        navigate("/FDAHome");
-      }
-      else if (detectedEmail === 'janehopkins.com') {
-        navigate("/JaneHopkinsDoctor");
-      }
-      else if (detectedEmail === 'bavaria.com') {
-        navigate("/BavariaHome");
-      }
-    }
+   
   };
 
   const logout = async () => {

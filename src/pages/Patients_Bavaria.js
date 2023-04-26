@@ -5,9 +5,28 @@ import TopBanner from "../components/TopBanner";
 import PatientList from "../components/PatientList_Bavaria";
 import { signOut } from 'firebase/auth';
 import { auth } from "../firebase-config";
-//import Patients_Bavaria from "./Patients_Bavaria";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useAuthState } from 'react-firebase-hooks/auth';
 
+const RouteProtect = (allowedDomains, Component) => {
+  const GuardedComponent = ({ ...props }) => {
+    const [user] = useAuthState(auth);
 
+    if (!user) {
+      return <Navigate to="/" />;
+    }
+
+    const domain = user.email.split("@")[1];
+
+    if (!allowedDomains.includes(domain)) {
+      return <Navigate to="/" />;
+    }
+
+    return <Component {...props} />;
+  };
+
+  return GuardedComponent;
+};
 
 const Patients_Bavaria = () => {
   const navigate = useNavigate();
@@ -37,4 +56,4 @@ const handleLogout = async () => {
   )
 }
 
-export default Patients_Bavaria;
+export default RouteProtect(["bavaria.com"], Patients_Bavaria);
