@@ -1,4 +1,5 @@
 import React from 'react';
+import logoutImg from '../assets/logout.png';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,7 +29,8 @@ const Navbar = ({ onLogout }) => {
           Add Patient 
         </Button>
         <Button color="inherit" onClick={onLogout}>
-            Logout
+            <img src={logoutImg} alt="Logout" style={{ width: '2em', height: '2em' }} />
+          Logout
           </Button>
       </Toolbar>
     </AppBar>

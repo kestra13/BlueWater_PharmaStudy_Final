@@ -51,7 +51,7 @@ const LoginModal = (props) => {
         navigate("/JaneHopkinsDoctor");
       }
       else if (detectedEmail === 'bavaria.com') {
-        navigate("/BavariaHome");
+        navigate("/Bavaria");
       }
     }
   };
