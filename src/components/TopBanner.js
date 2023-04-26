@@ -7,6 +7,7 @@ const TopBanner = () => {
     <div>
     
     <Box sx={{ display: 'flex', alignItems: 'center', height: '100px', justifyContent: 'center' ,gap: 4, backgroundImage: `url(${BlueWater_TopBanner_bg})`, backgroundSize: '100% 100%'  }}>
+      
     <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
         <img src={BlueWater_logo} alt="Pharma Study Logo" width="100" height="100" />
       </Box>

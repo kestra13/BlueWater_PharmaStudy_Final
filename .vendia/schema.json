@@ -112,6 +112,18 @@
           "batchNumber": {
             "type": "string"
           },
+          "drugType": {
+            "type": "string"
+          },
+          "studyName": {
+            "type": "string"
+          },
+          "studyStatus": {
+            "type": "string"
+          },
+          "shipmentHistory": {
+            "type": "string"
+          },
           "id": {
             "type": "string"
           }

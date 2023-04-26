@@ -73,7 +73,7 @@ const JaneHopkinsDoctor = () => {
         <Box></Box>
       </Stack>
       <h1>Patient List</h1>
-      <Button>View Patients</Button>
+      
       {loading ? (
         <Box
           display="flex"
