@@ -12,9 +12,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 import SideBanner from "../components/SideBanner";
-import PatientDisplay from "../components/PatientDisplay";
-import { ApolloProvider } from "@apollo/client";
-import client from "../components/apolloClient";
 import { useNavigate } from "react-router-dom";
 import PatientPopout from "../components/PatientPopout";
 import { signOut } from 'firebase/auth';
