@@ -11,8 +11,6 @@ const OrganizationButtons = (props) => {
     setOpen(false);
   };
 
-
-
   return (
     <div>
       <Box>
