@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const RouteProtect = (allowedDomains, Component) => {
 	const GuardedComponent = ({ ...props }) => {

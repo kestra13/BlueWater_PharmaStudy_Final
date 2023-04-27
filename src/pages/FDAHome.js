@@ -9,7 +9,6 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { signOut } from 'firebase/auth';
 import { auth } from "../firebase-config";
 import { useAuthState } from 'react-firebase-hooks/auth';
-// import RouteProtect from '../components/RoutingProtect';
 
 const RouteProtect = (allowedDomains, Component) => {
 	const GuardedComponent = ({ ...props }) => {

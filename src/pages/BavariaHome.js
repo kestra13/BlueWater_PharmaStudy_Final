@@ -6,7 +6,6 @@ import Patients_Bavaria from "./Patients_Bavaria";
 import View_Study from "./View_Study_Bavaria";
 import Shipment_Page from "./Shipment_Page_Bavaria";
 import TopBanner from "../components/TopBanner";
-// import RouteProtect from "../components/RoutingProtect";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router-dom';
 import { auth } from "../firebase-config";
