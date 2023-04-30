@@ -8,6 +8,7 @@ import Patients from "./FDA/Patients";
 import { Route, Routes } from "react-router-dom";
 import { signOut } from 'firebase/auth';
 import { auth } from "../firebase-config";
+import StudyProgress from '../components/StudyProgress';
 //import '../themes/FDAtheme.module.css'
 
 const FDAHome = () => {
@@ -25,6 +26,7 @@ const FDAHome = () => {
 			<Route path="/Patients/" element={<Patients />} />
 			<Route path="/Drugs/" element={<Drugs />} />
 		</Routes>
+		<StudyProgress/>
 		</div>
 	)
 }
