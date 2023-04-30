@@ -44,7 +44,7 @@
                                     <StepStatus />
                                     <StepDescription>
                                         <div className='invisible'>
-                                        FDA relabels assigns, and sends drugs to Jane Hopkins
+                                        FDA relabels, assigns, and sends drugs to Jane Hopkins
                                         </div>
                                     </StepDescription>
                                 </Step>
@@ -74,7 +74,7 @@
                                     <StepStatus />
                                     <StepDescription> 
                                         <div className = 'invisible'>
-                                            Study Results are released 
+                                            Study Results are released by FDA
                                         </div>
                                     </StepDescription>
                                 </Step>
