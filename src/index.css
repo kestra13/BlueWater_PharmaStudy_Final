@@ -12,15 +12,15 @@ body {
     monospace;
 }*/
 
-.py-5 {
+.pbar {
   width: auto;
   padding-left: 100px;
   padding-right: 100px;
-  font-size: auto;
+  font-size: flex;
 }
 
-@media only screen and (max-width: 1026px) {
-  .versatile {
+@media only screen and (max-width: 1024px) {
+  .invisible {
       display: none;
   }
 }

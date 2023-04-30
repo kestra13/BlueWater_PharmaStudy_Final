@@ -1,4 +1,3 @@
-import React, {useState, useEffect} from 'react'
     import { Container } from "react-bootstrap";
     import {
         Stepper,
@@ -13,45 +12,73 @@ import React, {useState, useEffect} from 'react'
  const StudyProgress = () => {
         const { step, incrementStep, decrementStep } = useStepper(0, 4);
         return (
-                <div id="responsive">
+                <div>
                    
-                    <Container  className="py-5">
-                        <div className="info">
+                    <Container className = "pbar">
+                        <div>
                             <h2>Study Progress</h2>
     
-                            <Stepper step ={2}>
+                            <Stepper step ={0}>
                                 <Step>
                                     <StepNumber />
-                                    <StepTitle id = "versatile">FDA Receives Information</StepTitle>
-                                    <StepStatus />
+                                    <StepTitle> 
+                                        <div className='invisible'>
+                                            FDA Receives Information
+                                        </div>
+                                    </StepTitle> 
+                                    <StepStatus /> 
                                     <StepDescription>
-                                        Bavaria sends drugs to FDA
-                                        Jane Hopkins sends eligible patients
+                                        <div className = 'invisible'>
+                                            Bavaria sends drugs to FDA
+                                            Jane Hopkins sends eligible patients
+                                        </div>
                                     </StepDescription>
                                 </Step>
                                 <Step>
                                     <StepNumber />
-                                    <StepTitle>FDA Processing</StepTitle>
+                                    <StepTitle>
+                                        <div className='invisible'>
+                                            FDA Processing
+                                        </div>
+                                    </StepTitle>
                                     <StepStatus />
                                     <StepDescription>
+                                        <div className='invisible'>
                                         FDA relabels assigns, and sends drugs to Jane Hopkins
+                                        </div>
                                     </StepDescription>
                                 </Step>
                                 <Step>
                                     <StepNumber />
-                                    <StepTitle>Administer Doses</StepTitle>
+                                    <StepTitle>
+                                        <div className='invisible'>
+                                            Administer Doses
+                                        </div>
+                                    </StepTitle>
                                     <StepStatus />
-                                    <StepDescription >
-                                        Doctor administer doses and records visit notes
+                                    <StepDescription>
+                                        <div className='invisible'>
+                                        Doctor:
+                                        Administer doses &
+                                        Records visit notes
+                                        </div>
                                     </StepDescription>
                                 </Step>
                                 <Step>
                                     <StepNumber />
-                                    <StepTitle>Study Results Available</StepTitle>
+                                    <StepTitle>
+                                        <div className = 'invisible'>
+                                            Study Results Available
+                                        </div>
+                                    </StepTitle>
                                     <StepStatus />
-                                    <StepDescription > Study Results are released </StepDescription>
+                                    <StepDescription> 
+                                        <div className = 'invisible'>
+                                            Study Results are released 
+                                        </div>
+                                    </StepDescription>
                                 </Step>
-                                
+            
                             </Stepper>
                         </div>
                     </Container>
