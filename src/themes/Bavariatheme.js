@@ -1,14 +1,14 @@
 import { createTheme } from '@mui/material/styles';
-//0 / 124 / 186
-const FDAtheme = createTheme({
+
+const Bavariatheme = createTheme({
   
   status: {
     danger: '#e53e3e',
   },
   palette: {
     primary: {
-      main: '#4B0082',
-      darker: '#053e85',
+      main: '#FFD966',
+      darker: '#F0E68C/',
     },
     neutral: {
       main: '#64748B',
@@ -16,4 +16,4 @@ const FDAtheme = createTheme({
     },
   },
 }); 
-export default FDAtheme;
+export default Bavariatheme;

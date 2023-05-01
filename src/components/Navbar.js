@@ -2,6 +2,7 @@ import React from 'react';
 import logoutImg from '../assets/logout.png';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import logo from "../assets/hospital.png";
 
 const Navbar = ({ onLogout }) => {
   const navigate = useNavigate();
@@ -19,8 +20,9 @@ const Navbar = ({ onLogout }) => {
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     <AppBar position="static">
       <Toolbar>
+      <img style={{ width: '100px', height: '100px' }} src={logo} alt="Logo" />
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-         Jane Hopkins
+          Jane Hopkins
         </Typography>
         <Button color="inherit" onClick = {handlePatientViewClick}>
           Patient View
