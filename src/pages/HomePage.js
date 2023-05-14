@@ -17,12 +17,6 @@ const HomePage = () => {
           variant = "h4"
         >
           Welcome. Login or register below to get started.
-
-          <p>
-          User: nsanchez1@fda.com, Password: Ironiciron54!
-          User: nsanchez1@janehopkins.com, Password: Ironiciron53!
-          User: nsanchez1@bavaria.com, Password: Ironiciron52!
-          </p>
         </Typography>
       <Stack sx={{ pt: 10 }}
         direction = "row"

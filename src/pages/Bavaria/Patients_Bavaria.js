@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar_Bavaria from "../../components/Navbar_Bavaria";
 import { useNavigate } from "react-router-dom";
 import { signOut } from 'firebase/auth';
-import { auth } from "../firebase-config";
+import { auth } from "../../firebase-config";
 import { Navigate } from "react-router-dom";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import TopBanner from "../../components/TopBanner";
