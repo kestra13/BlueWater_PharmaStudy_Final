@@ -12,14 +12,45 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  IconButton,
+
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import DeleteIcon from '@mui/icons-material/Delete';
 import useJaneHopkins from "../hooks/useJaneHopkins";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
   const [viewMode, setViewMode] = useState("grid");
   const [formData, setFormData] = useState({ ...patient });
   const [editMode, setEditMode] = useState(false);
+
+
+  const { entities } = useJaneHopkins();
+
+ 
+
+  const handleDeleteClick = async () => {
+    if (window.confirm("Are you sure you want to delete this patient? This action cannot be undone.")) {
+      try {
+        await entities.patient.remove(patient._id);
+        console.log("Patient deleted");
+        handleClose();
+        onUpdatePatient();
+      } catch (error) {
+        console.error("Error deleting patient data: ", error);
+      }
+    }
+  };
+
+
+  useEffect(() => {
+    setFormData({ ...patient });
+  }, [patient]);
 
   const fieldsToDisplay = [
     "name",
@@ -33,12 +64,12 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
 
   const wrapperRef = useRef(null);
   useOutsideClick(wrapperRef, () => {
-    setFormData({...patient});
+    setFormData({ ...patient });
     handleClose();
-    setEditMode(!editMode);
+    setEditMode(false);
   });
 
-  const { entities } = useJaneHopkins();
+
 
   if (!patient) {
     return null;
@@ -77,13 +108,22 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
 
   const submitData = async () => {
     try {
-      const updatedPatientData = await entities.Patient.update(formData);
+
+      const formDataForUpdate = {
+        _id: patient._id,
+        ...Object.fromEntries(
+          fieldsToDisplay.map((key) => [key, formData[key]])
+        ),
+      };
+
+      const updatedPatientData = await entities.patient.update(formDataForUpdate);
 
       onUpdatePatient(updatedPatientData);
 
       setViewMode("grid");
 
-      console.log("Patient update: " + updatedPatientData);
+   
+
     } catch (error) {
       console.error("Error updating patient data: ", error);
     }
@@ -94,6 +134,13 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
   const handleInputView = () => {
     setViewMode("input");
   };
+
+  const handleModalClose = () => {
+    setFormData({...patient});
+   
+    handleClose();
+    setEditMode(false);
+  }
 
   const renderPatientData = () => {
     if (editMode) {
@@ -168,6 +215,9 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
             <Button color="primary" onClick={handleEditClick}>
               Edit
             </Button>
+            <IconButton color="secondary" onClick={handleDeleteClick}>
+              <DeleteIcon />
+            </IconButton>
           </Grid>
         );
       } else if (viewMode === "list") {
@@ -233,9 +283,9 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
   };
 
   return (
-    <Modal open={isOpen} onClose={handleClose}>
+    <Modal open={isOpen} onClose={() => handleModalClose()}>
       <Box
-      ref = {wrapperRef}
+        ref={wrapperRef}
         sx={{
           position: "absolute",
           top: "50%",
@@ -298,8 +348,12 @@ const PatientPopout = ({ isOpen, handleClose, patient, onUpdatePatient }) => {
         </Box>
         {renderPatientData()}
       </Box>
+      
     </Modal>
+
   );
 };
 
 export default PatientPopout;
+
+

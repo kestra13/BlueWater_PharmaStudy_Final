@@ -2,9 +2,9 @@ import React from "react";
 import { Route, Routes, Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
-import Patients_Bavaria from "./Patients_Bavaria";
-import View_Study from "./View_Study_Bavaria";
-import Shipment_Page from "./Shipment_Page_Bavaria";
+import Patients_Bavaria from "./Bavaria/Patients_Bavaria";
+import View_Study from "./Bavaria/View_Study_Bavaria";
+import Shipment_Page from "./Bavaria/Shipment_Page_Bavaria";
 import TopBanner from "../components/TopBanner";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router-dom';
@@ -64,7 +64,7 @@ const BavariaHome = () => {
       </nav>
       
     <Routes>
-      <Route path="/Patients_Bavaria" element={<Patients_Bavaria />} />
+      <Route path="/Patients_Bavaria/" element={<Patients_Bavaria />} />
       <Route path="/View_Study" element={<View_Study />} />
       <Route path="/Shipment_Page" element={<Shipment_Page />} />
     </Routes>

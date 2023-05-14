@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider, AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import FDAIcon from "../assets/fda-logo.jpeg";
 import FDAtheme from "../themes/FDAtheme";
+import logoutImg from '../assets/logout.png';
 import {Link} from 'react-router-dom';
 const FDANavbar = ({ onLogout }) => {
   return (
@@ -9,7 +10,9 @@ const FDANavbar = ({ onLogout }) => {
     <Box backgroundColor = "primary" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
     <AppBar position="static">
       <Toolbar>
-		  <img src={FDAIcon} style={{ width: "200px", height: "120px" }} />
+      <Typography variant = "h6" sx={{flexGrow: 1}}>
+		    <img style={{ width: '100px', height: '100px' }}src={FDAIcon} alt="Logo" />
+      </Typography>
 		<Button component={Link} to = "/FDA/Patients" color="inherit">
           Patients
 	  </Button>
@@ -20,7 +23,8 @@ const FDANavbar = ({ onLogout }) => {
          View Study
 	  </Button>
         <Button color="inherit" onClick={onLogout}>
-            Logout
+        <img src={logoutImg} alt="Logout" style={{ width: '2em', height: '2em' }} />
+      Logout
           </Button>
       </Toolbar>
     </AppBar>

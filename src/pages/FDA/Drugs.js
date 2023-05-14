@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import TopBanner from "../../components/TopBanner";
+import Send_Samples from '../../components/Send_Samples_Bavaria';
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -28,7 +30,7 @@ const RouteProtect = (allowedDomains, Component) => {
 const Drugs = () => {
 	return (
 		<div>
-			Drugs Page
+			<Send_Samples/>
 		</div>
 	)
 }

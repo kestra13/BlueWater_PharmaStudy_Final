@@ -12,9 +12,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 import SideBanner from "../components/SideBanner";
-import PatientDisplay from "../components/PatientDisplay";
-import { ApolloProvider } from "@apollo/client";
-import client from "../components/apolloClient";
 import { useNavigate } from "react-router-dom";
 import PatientPopout from "../components/PatientPopout";
 import { signOut } from 'firebase/auth';
@@ -55,6 +52,17 @@ const JaneHopkinsDoctor = () => {
 
   const [patients, setPatients] = useState([]);
 
+  const fetchPatients = async () => {
+    try {
+      const response = await entities.patient.list();
+      //console.log("Response:", response);
+      setPatients(response.items);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching patients:", error);
+    }
+  };
+
   const handlePatientClick = (patient) => {
     setSelectedPatient(patient);
     setIsPopoutOpen(true);
@@ -66,16 +74,7 @@ const JaneHopkinsDoctor = () => {
   };
 
   useEffect(() => {
-    const fetchPatients = async () => {
-      try {
-        const response = await entities.patient.list();
-        //console.log("Response:", response);
-        setPatients(response.items);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching patients:", error);
-      }
-    };
+    
 
     fetchPatients();
   }, [entities]);
@@ -116,6 +115,7 @@ const JaneHopkinsDoctor = () => {
             isOpen={isPopoutOpen}
             handleClose={handlePopoutClose}
             patient={selectedPatient}
+            onUpdatePatient = {fetchPatients}
           />
         </>
       )}

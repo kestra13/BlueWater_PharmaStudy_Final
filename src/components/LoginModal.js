@@ -44,7 +44,7 @@ const LoginModal = (props, { onLogin }) => {
         navigate("/JaneHopkinsDoctor");
       }
       else if (detectedEmail === 'bavaria.com') {
-        navigate("/BavariaHome");
+        navigate("/Bavaria");
       }
 
     } catch (error) {

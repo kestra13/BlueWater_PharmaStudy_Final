@@ -9,6 +9,8 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { signOut } from 'firebase/auth';
 import { auth } from "../firebase-config";
 import { useAuthState } from 'react-firebase-hooks/auth';
+import StudyProgress from '../components/StudyProgress';
+//import '../themes/FDAtheme.module.css'
 
 const RouteProtect = (allowedDomains, Component) => {
 	const GuardedComponent = ({ ...props }) => {
@@ -45,8 +47,8 @@ const FDAHome = () => {
 			<Route path="/Patients/" element={<Patients />} />
 			<Route path="/Drugs/" element={<Drugs />} />
 		</Routes>
+		<StudyProgress/>
 		</div>
-			
 	)
 }
 

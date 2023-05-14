@@ -2,6 +2,7 @@ import React from 'react';
 import { Stack, Typography } from "@mui/material";
 import TopBanner from '../components/TopBanner';
 import LoginAndRegisterButtons from '../components/LoginAndRegisterButtons';
+import gif from '../assets/test1.gif';
 
 const HomePage = () => {
   return (
@@ -16,6 +17,12 @@ const HomePage = () => {
           variant = "h4"
         >
           Welcome. Login or register below to get started.
+
+          <p>
+          User: nsanchez1@fda.com, Password: Ironiciron54!
+          User: nsanchez1@janehopkins.com, Password: Ironiciron53!
+          User: nsanchez1@bavaria.com, Password: Ironiciron52!
+          </p>
         </Typography>
       <Stack sx={{ pt: 10 }}
         direction = "row"
