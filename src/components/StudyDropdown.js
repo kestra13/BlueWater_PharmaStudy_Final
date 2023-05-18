@@ -17,7 +17,7 @@ const DropdownMenu = ({ options }) => {
   return (
     
     <div>
-      <h1>Select a Study to View Progress</h1>
+      <h1>Select a Study to View Progress Bar</h1>
       <select value={selectedStudy} onChange={handleOptionChange}>
         <option value="">Select an option</option>
         {options.map((object) => (
