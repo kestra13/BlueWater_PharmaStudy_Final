@@ -2,12 +2,14 @@ import { Container } from "react-bootstrap";
 import {
     Stepper,
     Step,
+    useStepper,
     StepNumber,
     StepTitle,
     StepStatus,
     StepDescription,
 } from "react-progress-stepper";
 import React, {useState, useEffect} from "react";
+import useJaneHopkins from "../hooks/useJaneHopkins";
 
 
 
@@ -35,7 +37,7 @@ if (studyStatus === 'assigned') {
 
                 <Container className = "pbar">
                     <div> 
-                        <h2>Study Progress {trackStatus} </h2>
+                        <h2>Study Progress</h2>
 
                         <Stepper step ={trackStatus}>
                             <Step>
